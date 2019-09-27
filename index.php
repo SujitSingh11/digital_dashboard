@@ -1,5 +1,6 @@
 <?php
 	include 'assets/db/connect_db.php';
+	session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -17,7 +18,6 @@
 				height: 100;
 				background-position: center;
 				background-repeat: no-repeat;
-				background-size: cover;
 			  }
 			.content{
 
@@ -51,7 +51,7 @@
 					<ul class="navbar-nav ml-lg-auto">
 						<li class="nav-item">
 							<button class="btn btn-default nav-link" data-toggle="modal" data-target="#modal-signup">
-								Discover
+								Sign-Up
 							</button>
 						</li>
 						<li class="nav-item">
@@ -64,8 +64,18 @@
 			</div>
 		</nav>
 		<!--Main-->
-		<div class="container content">
-
+		<div class="container">
+			<div class="content">
+				<?php
+					if (isset($_SESSION['message'])) {
+						?>
+						<div class="alert alert-success" role="alert">
+							<strong><?php $_SESSION['mess_title']?>!</strong> <?php $_SESSION['message']?>
+						</div>
+						<?php
+					}
+				?>
+			</div>
 		</div>
 		<!--Footer-->
 		<?php
