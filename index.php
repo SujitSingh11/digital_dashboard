@@ -1,6 +1,22 @@
 <?php
 	include 'assets/db/connect_db.php';
 	session_start();
+
+	if(isset($_SESSION['logged_in']))
+	{
+		if($_SESSION['user_type']==0)
+		{
+			header("location: admin/admin_dashboard.php");
+		}
+		else if($_SESSION['user_type']==1)
+		{
+			header("location: manager/manager_dashboard.php");
+		}
+		else if($_SESSION['user_type']==2)
+		{
+			header("location: employee/employee_dashboard.php");
+		}
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -99,7 +115,7 @@
 			include 'include/modal_include.php';
 		?>
 		<!--Footer-->
-
+		
 		<!--JS Include-->
 		<?php
 			include 'include/js_include.php';

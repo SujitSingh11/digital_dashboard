@@ -42,7 +42,7 @@ else {
 					$result_usertype = $conn->query("SELECT manager_id FROM fl_manager WHERE user_id='{$_SESSION['user_id']}'");
 					$usertype = $result_usertype->fetch_assoc();
 					$_SESSION['manager_id'] = $usertype['manager_id'];
-					header("location: ..employee/employee_dashboard.php");
+					header("location: ../employee/employee_dashboard.php");
 				}
 			}
 		}

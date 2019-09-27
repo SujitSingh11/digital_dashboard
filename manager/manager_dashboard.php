@@ -56,17 +56,7 @@
 					<div class="nav-item">
 						<h3><?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></h3>
 						<p>
-							<?php
-								if ($_SESSION['user_type']==0) {
-									echo 'Admin';
-								}
-								elseif ($_SESSION['user_type']==1) {
-									echo 'Manager';
-								}
-								elseif ($_SESSION['user_type']==2) {
-									echo 'Employee';
-								}
-						 	?>
+							Manager
 						</p>
 					</div>
 					<li class="nav-item">
@@ -83,7 +73,7 @@
 				<hr class="my-3">
 				<ul class="navbar-nav mb-md-3">
 					<li class="nav-item">
-						<button type="submit" class="btn btn-icon btn-3 btn-danger" id="logout"><i class="ni ni-button-power"></i>  Signout</button>
+						<button type="submit" class="btn btn-icon btn-3 btn-danger" id="logout"><i class="ni ni-button-power"></i> Signout</button>
 					</li>
 				</ul>
 			</div>
@@ -109,13 +99,13 @@
 				    <p class="display-4">Welcome <?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></p>
 				    <hr class="my-4">
 				    <p>No Active project found, Create your first Project</p>
-				    <a class="btn btn-primary" href="#" role="button">Create</a>
+				    <button class="btn btn-primary" data-toggle="modal" data-target="#modal-create-project">Create Project</button>
 			  	</div>
 	        </div>
 	      </div>
 	    </div>
-		<div class="container">
-
+	    <div class="container">
+			<?php include '../include/modal_project.php'; ?>
 		</div>
 		<footer class="footer">
 			<div class="container-fluid">
@@ -146,7 +136,7 @@
 	</div>
 	<script>
         document.getElementById("logout").onclick = function () {
-            location.href = "login-system/logout.php";
+            location.href = "../login-system/logout.php";
         };
 	</script>
 	<?php
