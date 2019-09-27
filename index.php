@@ -115,7 +115,7 @@
 			include 'include/modal_include.php';
 		?>
 		<!--Footer-->
-		
+
 		<!--JS Include-->
 		<?php
 			include 'include/js_include.php';
