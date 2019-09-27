@@ -22,6 +22,9 @@
 			.content{
 
 			}
+			.footer{
+
+			}
 		</style>
 	</head>
 	<body>
@@ -64,8 +67,19 @@
 			</div>
 		</nav>
 		<!--Main-->
+		<div class="container-fluid mt-2">
+			<center>
+				<div class="card">
+					<div class="card-body">
+						<h1 class="card-title">Flow</h1>
+						<p class="card-text">A workflow management tool <br> Get Started</p>
+						<button data-toggle="modal" data-target="#modal-signup" class="btn btn-primary">Create an Account</button>
+					</div>
+				</div>
+			</center>
+		</div>
 		<div class="container">
-			<div class="content">
+			<div class="content m-5">
 				<?php
 					if (isset($_SESSION['message'])) {
 						?>
@@ -78,12 +92,13 @@
 						unset($_SESSION['mess_title']);
 					}
 				?>
+
 			</div>
 		</div>
-		<!--Footer-->
 		<?php
 			include 'include/modal_include.php';
 		?>
+		<!--Footer-->
 
 		<!--JS Include-->
 		<?php
