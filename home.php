@@ -77,7 +77,101 @@
 		</div>
 	</nav>
 	<div class="main-content">
+		<?php
+		if ($_SESSION['user_type']==0) {
+			?>
 
+		<!-- Header -->
+	    <div class="header bg-gradient-primary pb-4 pt-3 pt-md-4">
+	      <div class="container-fluid">
+	        <div class="header-body">
+				<?php
+					if (isset($_SESSION['message'])) {
+						?>
+						<div class="alert alert-<?php echo $_SESSION['mess_type']?>" role="alert">
+							<strong><?php echo $_SESSION['mess_title']?>!</strong> <?php echo $_SESSION['message']?>
+						</div>
+						<?php
+						unset($_SESSION['message']);
+						unset($_SESSION['mess_type']);
+						unset($_SESSION['mess_title']);
+					}
+				?>
+				<div class="jumbotron text-center">
+				    <p class="display-4">Welcome <?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></p>
+				    <hr class="my-4">
+				    <p>Create a Manager</p>
+				    <button class="btn btn-primary " data-toggle="modal" data-target="#modal-add-manager">Create</button>
+			  	</div>
+
+	        </div>
+	      </div>
+	    </div>
+		<div class="container">
+			<?php include 'include/model_add_manager.php'; ?>
+		</div>
+		<?php	}
+		?>
+		<?php
+		if ($_SESSION['user_type']==1) {
+		?>
+		<!-- Header -->
+	    <div class="header bg-gradient-primary pb-4 pt-3 pt-md-4">
+	      <div class="container-fluid">
+	        <div class="header-body">
+				<?php
+					if (isset($_SESSION['message'])) {
+						?>
+						<div class="alert alert-<?php echo $_SESSION['mess_type']?>" role="alert">
+							<strong><?php echo $_SESSION['mess_title']?>!</strong> <?php echo $_SESSION['message']?>
+						</div>
+						<?php
+						unset($_SESSION['message']);
+						unset($_SESSION['mess_type']);
+						unset($_SESSION['mess_title']);
+					}
+				?>
+				<div class="jumbotron text-center">
+				    <p class="display-4">Welcome <?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></p>
+				    <hr class="my-4">
+				    <p>No Active project found, Create your first Project</p>
+				    <a class="btn btn-primary" href="#" role="button">Create</a>
+			  	</div>
+
+	        </div>
+	      </div>
+	    </div>
+		<div class="container">
+
+		</div>
+		<?php	}
+		?>
+		<footer class="footer">
+			<div class="container-fluid">
+				<nav class="pull-left" style="float:left;">
+					<ul class="nav">
+						<li class="nav-item">
+							<a class="nav-link" href="manager_index.php">
+								Home
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">
+								Help
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">
+								Feedback
+							</a>
+						</li>
+					</ul>
+				</nav>
+				<div class="copyright" style="float:right;">
+					@2019 Made by Sujit Singh and Shubham
+				</div>
+			</div>
+		</footer>
 	</div>
 	<script>
         document.getElementById("logout").onclick = function () {

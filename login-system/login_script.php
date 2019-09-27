@@ -24,7 +24,7 @@ else {
 			$_SESSION['logged_in'] = true;
 			$user['login_counter'] +=1;
 			$counter = $user['login_counter'];
-			$sql_counter_inc = $conn->query("INSERT INTO fl_user (login_counter) VALUES('$counter')");
+			$sql_counter_inc = $conn->query("UPDATE fl_user SET login_counter=$counter WHERE email='$email'");
 			if ($sql_counter_inc) {
 				if ($_SESSION['user_type'] == 0) {
 					$result_usertype = $conn->query("SELECT admin_id FROM fl_admin WHERE user_id='{$_SESSION['user_id']}'");
