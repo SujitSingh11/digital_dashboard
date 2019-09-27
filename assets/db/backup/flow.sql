@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2019 at 06:37 AM
+-- Generation Time: Sep 27, 2019 at 07:41 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -65,7 +65,8 @@ CREATE TABLE `fl_manager` (
 
 CREATE TABLE `fl_user` (
   `user_id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
   `dob` date NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
