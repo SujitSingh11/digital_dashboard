@@ -49,7 +49,7 @@ else {
 		else{
 			$_SESSION['mess_type'] = 'warning';
 			$_SESSION['mess_title'] = 'Warning';
-			$_SESSION['message'] = 'Email havn\'t been verified!';
+			$_SESSION['message'] = 'Email has not been verified!';
 			header("location: ../index.php");
 		}
 
