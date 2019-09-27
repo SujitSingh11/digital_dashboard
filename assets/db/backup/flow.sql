@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2019 at 12:49 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.4
+-- Generation Time: Sep 27, 2019 at 02:23 PM
+-- Server version: 10.1.19-MariaDB
+-- PHP Version: 5.6.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -34,6 +32,38 @@ CREATE TABLE `fl_admin` (
   `ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `fl_admin`
+--
+
+INSERT INTO `fl_admin` (`admin_id`, `user_id`, `ID`) VALUES
+(1, 3, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fl_comment`
+--
+
+CREATE TABLE `fl_comment` (
+  `comment_id` int(11) NOT NULL,
+  `task_id` int(100) NOT NULL,
+  `employee_id` int(100) DEFAULT NULL,
+  `manager_id` int(100) DEFAULT NULL,
+  `comment` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fl_department`
+--
+
+CREATE TABLE `fl_department` (
+  `dep_id` int(11) NOT NULL,
+  `dep_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 -- --------------------------------------------------------
 
 --
@@ -52,7 +82,7 @@ CREATE TABLE `fl_employee` (
 --
 
 INSERT INTO `fl_employee` (`employee_id`, `user_id`, `dep_id`, `ID`) VALUES
-(3, 3, 0, NULL);
+(4, 10, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -63,8 +93,16 @@ INSERT INTO `fl_employee` (`employee_id`, `user_id`, `dep_id`, `ID`) VALUES
 CREATE TABLE `fl_manager` (
   `manager_id` int(11) NOT NULL,
   `user_id` int(100) NOT NULL,
+  `dep_id` int(100) NOT NULL,
   `ID` int(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fl_manager`
+--
+
+INSERT INTO `fl_manager` (`manager_id`, `user_id`, `dep_id`, `ID`) VALUES
+(1, 9, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -80,6 +118,19 @@ CREATE TABLE `fl_project` (
   `dept_code` int(11) NOT NULL,
   `deadline` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `time_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fl_task`
+--
+
+CREATE TABLE `fl_task` (
+  `task_id` int(11) NOT NULL,
+  `project_id` int(100) NOT NULL,
+  `employee_id` int(100) NOT NULL,
+  `task_decription` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -106,9 +157,9 @@ CREATE TABLE `fl_user` (
 --
 
 INSERT INTO `fl_user` (`user_id`, `first_name`, `last_name`, `email`, `password`, `hash`, `user_type`, `active`, `login_counter`, `create_time`) VALUES
-(3, 'Sujit', 'Singh', 'sujitkumarsingh29@gmail.com', '$2y$10$2x.8AsKbn6zJz30lAXODCuuc38OfN60ib3ihdrGfDfocYusnO1w8q', '8df707a948fac1b4a0f97aa554886ec8', 2, 1, 0, '2019-09-27 14:43:59'),
-(4, '', '', '', '', '', 0, 0, 1, '2019-09-27 15:03:19'),
-(5, '', '', '', '', '', 0, 0, 1, '2019-09-27 15:22:44');
+(3, 'Sujit', 'Singh', 'sujitkumarsingh29@gmail.com', '$2y$10$2x.8AsKbn6zJz30lAXODCuuc38OfN60ib3ihdrGfDfocYusnO1w8q', '8df707a948fac1b4a0f97aa554886ec8', 0, 1, 1, '2019-09-27 14:43:59'),
+(9, 'Parth', 'Ladda', 'parth@gmail.com', '$2y$10$tWkEjyjT8wSZ934azMv4Jexufb31ix6aCMYczWEV1Ma9WexiNZ5cG', '9c82c7143c102b71c593d98d96093fde', 1, 1, 0, '2019-09-27 17:46:09'),
+(10, 'Sapna', 'Rathod', 'sapna@gmail.com', '$2y$10$.3C.Yg5UP3HC9RuXVxutU.san3nQ0y1zBezBfq5p9cv/WHU7GO5ea', '24b16fede9a67c9251d3e7c7161c83ac', 2, 1, 0, '2019-09-27 17:50:31');
 
 --
 -- Indexes for dumped tables
@@ -119,6 +170,18 @@ INSERT INTO `fl_user` (`user_id`, `first_name`, `last_name`, `email`, `password`
 --
 ALTER TABLE `fl_admin`
   ADD PRIMARY KEY (`admin_id`);
+
+--
+-- Indexes for table `fl_comment`
+--
+ALTER TABLE `fl_comment`
+  ADD PRIMARY KEY (`comment_id`);
+
+--
+-- Indexes for table `fl_department`
+--
+ALTER TABLE `fl_department`
+  ADD PRIMARY KEY (`dep_id`);
 
 --
 -- Indexes for table `fl_employee`
@@ -139,6 +202,12 @@ ALTER TABLE `fl_project`
   ADD PRIMARY KEY (`project_id`);
 
 --
+-- Indexes for table `fl_task`
+--
+ALTER TABLE `fl_task`
+  ADD PRIMARY KEY (`task_id`);
+
+--
 -- Indexes for table `fl_user`
 --
 ALTER TABLE `fl_user`
@@ -152,33 +221,42 @@ ALTER TABLE `fl_user`
 -- AUTO_INCREMENT for table `fl_admin`
 --
 ALTER TABLE `fl_admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `fl_comment`
+--
+ALTER TABLE `fl_comment`
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `fl_department`
+--
+ALTER TABLE `fl_department`
+  MODIFY `dep_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `fl_employee`
 --
 ALTER TABLE `fl_employee`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `fl_manager`
 --
 ALTER TABLE `fl_manager`
-  MODIFY `manager_id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `manager_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `fl_project`
 --
 ALTER TABLE `fl_project`
   MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT;
-
+--
+-- AUTO_INCREMENT for table `fl_task`
+--
+ALTER TABLE `fl_task`
+  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `fl_user`
 --
 ALTER TABLE `fl_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-COMMIT;
-
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -8,6 +8,7 @@
     $pass = mysqli_real_escape_string($conn,$_POST['password']);
     $passcheck = mysqli_real_escape_string($conn,$_POST['re-password']);
     $user_type = 1;
+    $active = 1;
 
     if($pass=$passcheck)
     {
@@ -21,8 +22,8 @@
             $_SESSION['message'] = 'User with this email already exists!';
             header("location: ../home.php");
         }else {
-            $sql_users = "INSERT INTO fl_user ( `first_name`, `last_name`, `email`, `password`,`hash`,`user_type`)
-            VALUES ('$first_name','$last_name','$email','$password','$hash','$user_type')";
+            $sql_users = "INSERT INTO fl_user ( `first_name`, `last_name`, `email`, `password`,`hash`,`user_type`,`active`)
+            VALUES ('$first_name','$last_name','$email','$password','$hash','$user_type',`$active`)";
             $query_users = mysqli_query($conn,$sql_users);
 
             $sql_manager = mysqli_query($conn,"SELECT user_id from fl_user WHERE email='$email'");
