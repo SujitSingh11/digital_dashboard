@@ -67,10 +67,8 @@
                     $mail->SMTPSecure = 'ssl';
                     $mail->Port = 465;
 
-
                     $mail->setFrom('flow.assist@yahoo.com','Flow');
                     $mail->addAddress($email);
-
 
                     $mail->isHTML(true);
                     $mail->Subject = $subject;
