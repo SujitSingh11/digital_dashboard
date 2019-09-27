@@ -83,8 +83,8 @@
 			?>
 
 		<!-- Header -->
-	    <div class="header bg-gradient-primary pb-4 pt-3 pt-md-4">
-	      <div class="container-fluid">
+
+      	<div class="container-fluid">
 	        <div class="header-body">
 				<?php
 					if (isset($_SESSION['message'])) {
@@ -106,14 +106,13 @@
 			  	</div>
 
 	        </div>
-	      </div>
 	    </div>
 		<div class="container">
 			<?php include 'include/model_add_manager.php'; ?>
 		</div>
 		<?php	}
 		?>
-		<!-- Employee -->
+		<!-- Manager -->
 		<?php
 		if ($_SESSION['user_type']==1) {
 		?>
@@ -139,7 +138,6 @@
 				    <p>No Active project found, Create your first Project</p>
 				    <a class="btn btn-primary" href="#" role="button">Create</a>
 			  	</div>
-
 	        </div>
 	      </div>
 	    </div>
@@ -172,7 +170,7 @@
 				    <p class="display-4">Welcome <?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></p>
 				    <hr class="my-4">
 				    <p>No Active Project Found</p>
-				    
+
 			  	</div>
 
 	        </div>
