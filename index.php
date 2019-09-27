@@ -15,7 +15,7 @@
 
 
         <?php
-            include 'assets/db/js_include.php';
+            include 'include/js_include.php';
         ?>
     </body>
 </html>
