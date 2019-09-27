@@ -22,7 +22,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text"><i class="ni ni-bullet-list-67"></i></span>
 									</div>
-									<textarea class="form-control" rows=5 placeholder="Project Description" name="project_description"></textarea>>
+									<textarea class="form-control" rows=5 placeholder="Project Description" name="project_description"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
