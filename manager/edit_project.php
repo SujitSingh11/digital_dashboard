@@ -6,7 +6,6 @@ session_start();
 $project_id = mysqli_real_escape_string($conn,$_POST['project_id']);
 $project_name = mysqli_real_escape_string($conn,$_POST['project_name']);
 $project_desc = mysqli_real_escape_string($conn,$_POST['project_desc']);
-$dept_code = mysqli_real_escape_string($conn,$_POST['dept_code']);
 $deadline = mysqli_real_escape_string($conn,$_POST['deadline']);
 
 $slc_prj = $conn->query("SELECT * FROM fl_project WHERE manager_id = '$manager_id' AND project_name = '$project_name' ");
