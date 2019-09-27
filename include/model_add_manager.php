@@ -7,7 +7,7 @@
 						<div class="text text-center my-3">Add Manager</div>
 					</div>
 					<div class="card-body px-lg-5 py-lg-3">
-						<form role="form" method="post" action="admin/add_manager.php">
+						<form role="form" method="post" action="../admin/add_manager.php">
 							<div class="form-group mb-3">
 								<div class="input-group input-group-alternative">
 									<div class="input-group-prepend">

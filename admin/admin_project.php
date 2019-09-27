@@ -65,14 +65,14 @@
 							Admin
 						</p>
 					</div>
-					<li class="nav-item">
+                    <li class="nav-item">
 						<a class="nav-link  " href="admin_profile.php"><i class="ni ni-single-02 text-yellow"></i> Profile</a>
 					</li>
-					<li class="nav-item ">
-						<a class=" nav-link active " href="admin_dashboard.php"><i class="ni ni-tv-2 text-primary"></i> Dashboard</a>
+					<li class="nav-item">
+						<a class=" nav-link " href="admin_dashboard.php"><i class="ni ni-tv-2 text-primary"></i> Dashboard</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link " href="admin_project.php"><i class="ni ni-planet text-blue"></i> Projects</a>
+						<a class="nav-link active" href="admin_project.php"><i class="ni ni-planet text-blue"></i> Projects</a>
 					</li>
 				</ul>
 				<!-- Divider -->
