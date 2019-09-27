@@ -7,7 +7,7 @@ $userid = $_SESSION['user_id'];
 
 $project_name = mysqli_real_escape_string($conn,$_POST['project_name']);
 $project_desc = mysqli_real_escape_string($conn,$_POST['project_desc']);
-$deadline = mysqli_real_escape_string($conn,$_POST['deadline']);
+$deadline = date(Y-m-d,strtotime($_POST['deadline']));
 $manager_id = mysqli_query($conn, "SELECT manager_id FROM fl_manager WHERE user_id='$user_id'");
 
 $slc_prj = $conn->query("SELECT * FROM fl_project WHERE manager_id = '$manager_id' AND project_name = '$project_name' ");

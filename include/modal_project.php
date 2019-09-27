@@ -109,7 +109,7 @@
 						<form role="form" method="post" action="manager/delete_project.php">
 							<div class="form-group mb-3">
 								<div class="input-group input-group-alternative">
-									<label>Are you sure?</label>			
+									<label>Are you sure?</label>
 								</div>
 							</div>
 							<div class="form-group">
