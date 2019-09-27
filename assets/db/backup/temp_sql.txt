@@ -1,0 +1,7 @@
+CREATE TABLE `flow`.`fl_user` ( `user_id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(100) NOT NULL , `dob` DATE NOT NULL , `email` VARCHAR(100) NOT NULL , `password` VARCHAR(100) NOT NULL , `active` BOOLEAN NOT NULL DEFAULT FALSE , `login_counter` INT(100) NOT NULL DEFAULT '0' , `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`user_id`)) ENGINE = InnoDB;
+
+CREATE TABLE `flow`.`fl_employee` ( `employee_id` INT NOT NULL AUTO_INCREMENT , `user_id` INT(100) NOT NULL , `dep_id` INT(100) NOT NULL , `ID` INT(100) NULL DEFAULT NULL , PRIMARY KEY (`employee_id`)) ENGINE = InnoDB;
+
+CREATE TABLE `flow`.`fl_manager` ( `manager_id` INT NOT NULL AUTO_INCREMENT , `user_id` INT(100) NOT NULL , `ID` INT(100) NULL DEFAULT NULL , PRIMARY KEY (`manager_id`)) ENGINE = InnoDB;
+
+CREATE TABLE `flow`.`fl_admin` ( `admin_id` INT NOT NULL AUTO_INCREMENT , `user_id` INT(100) NOT NULL , `ID` INT NULL DEFAULT NULL , PRIMARY KEY (`admin_id`)) ENGINE = InnoDB;
