@@ -7,6 +7,12 @@
         $_SESSION['message'] = "You are not Signed In.! <br> Please Sign in.";
         die(header('Location: ../index.php'));
     }
+    $sql_manager = "SELECT fl_user.user_id AS user_id, fl_manager.manager_id AS m_id, fl_user.first_name AS first_name, fl_user.last_name AS last_name,
+    fl_user.email AS email, fl_user.active AS active
+            FROM fl_user
+            INNER JOIN fl_manager ON fl_manager.user_id = fl_user.user_id";
+    $query_manager = mysqli_query($conn,$sql_manager);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +32,7 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<a class="navbar-brand pt-0" href="index.html">
-				<img src="assets/img/logo_black.png" class="navbar-brand-img" alt="...">
+				<img src="../assets/img/logo_black.png" class="navbar-brand-img" alt="...">
 			</a>
 			<ul class="nav align-items-center d-md-none">
 				<li class="nav-item dropdown">
@@ -40,7 +46,7 @@
 					<div class="row">
 						<div class="col-6 collapse-brand">
 							<a href="index.html">
-								<img src="assets/img/logo_black.png" class="navbar-brand-img" alt="...">
+								<img src="../assets/img/logo_black.png" class="navbar-brand-img" alt="...">
 							</a>
 						</div>
 						<div class="col-6 collapse-close">
@@ -90,25 +96,7 @@
 			<div class="col text-center">
 				<p class="display-4 m-3">Welcome <?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></p>
 			</div>
-			<div class="row">
-				<div class="col">
-					<div class="jumbotron text-center">
-						<p class="display-4">Manager</p>
-					    <hr class="my-4">
-					    <button class="btn btn-primary " data-toggle="modal" data-target="#modal-add-manager">Create Manager</button>
-						<button class="btn btn-danger " data-toggle="modal" data-target="#modal-remove-manager">Remove Manager</button>
-				  	</div>
-				</div>
-				<div class="col">
-					<div class="jumbotron text-center">
-						<p class="display-4">Department</p>
-					    <hr class="my-4">
-					    <button class="btn btn-primary " data-toggle="modal" data-target="#modal-add-department">Create Department</button>
-						<button class="btn btn-danger " data-toggle="modal" data-target="#modal-remove-department">Remove Department</button>
-				  	</div>
-				</div>
-			</div>
-				<?php
+                <?php
 					if (isset($_SESSION['message'])) {
 						?>
 						<div class="alert alert-<?php echo $_SESSION['mess_type']?>" role="alert">
@@ -120,9 +108,91 @@
 						unset($_SESSION['mess_title']);
 					}
 				?>
+            <div class="container">
+                <div class="row m-5">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header bg-dark-gradient">
+                                <div class="d-flex align-items-center">
+                                    <h4 class="card-title" style="color:#fff;">Managers</h4>
+                                    <button class="btn btn-dark btn-round ml-auto" data-toggle="modal" data-target="#addemployee">
+                                        <i class="fa fa-plus"></i>
+                                        Add Managers
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="add-row" class="display table table-striped table-hover" >
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Approved</th>
+                                                <th style="width: 10%">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                                $no = 1;
+                                                while ($row_manager = mysqli_fetch_assoc($query_manager)) {
+                                            ?>
+                                                <tr>
+                                                    <td><?= $no ?></td>
+                                                    <td><?= $row_manager['first_name'].' '.$row_manager['last_name']?></td>
+                                                    <td><?= $row_manager['email']?></td>
+                                                    <td><?php
+                                                        if ($row_manager['active'] == 1) {
+                                                            echo "Approved";
+                                                        }else {
+                                                            echo "Not Approved";
+                                                        }
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <form class="form-button-action" action="edit_manager.php" method="POST">
+                                                            <input type="hidden" name="user_id" value="<?=$row_manager['user_id']?>">
+                                                            <input type="hidden" name="m_id" value="<?=$row_manager['m_id']?>">
+                                                            <?php
+                                                            if ($row_manager['active'] == 0) {
+                                                            ?>
+                                                            <button type="submit" data-toggle="tooltip" name="approve" class="btn btn-link btn-primary" data-original-title="Approve">
+                                                                <i class="fa fa-check-circle"></i>
+                                                            </button>
+                                                            <?php
+                                                            }else { ?>
+                                                                <button type="submit" data-toggle="tooltip" name="deactivate" class="btn btn-link btn-warning" data-original-title="Deactivate">
+                                                                    <i class="fa fa-times-circle"></i>
+                                                                </button> <?php
+                                                            }
+                                                            ?>
+                                                            <button type="submit" data-toggle="tooltip" name="remove" class="btn btn-link btn-danger" data-original-title="Remove Employee">
+                                                                <i class="fa fa-times"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            <?php
+                                                $no++;
+                                                }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card m-5">
+                    <p class="card-title p-3">Department</p>
+                    <hr class="my-4">
+                    <button class="btn btn-primary " data-toggle="modal" data-target="#modal-add-department">Create Department</button>
+                </div>
+            </div>
 	    </div>
 		<div class="container">
-			<?php include 'include/model_add_manager.php'; ?>
+			<?php include '../include/model_add_manager.php'; ?>
 		</div>
 
 		<footer class="footer">
