@@ -51,7 +51,7 @@
 										<span class="input-group-text"><i class="ni ni-single-02"></i></span>
 									</div>
 									<input class="form-control" placeholder="First Name" id="fname" type="text">
-					 
+
 									<input class="form-control" placeholder="Last Name" id="lname" type="text">
 								</div>
 							</div>
