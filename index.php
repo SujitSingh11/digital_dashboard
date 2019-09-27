@@ -31,7 +31,7 @@
 		<!--Navbar-->
 		<nav class="navbar py-1 navbar-horizontal navbar-expand-lg navbar-dark bg-default">
 			<div class="container">
-				<a class="navbar-brand" href="#">FLOW</a>
+				<a class="navbar-brand" href="#"><img src="assets/img/logo_white.png" class="navbar-brand-img" alt="..."></a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -40,7 +40,7 @@
 						<div class="row">
 							<div class="col-6 collapse-brand">
 								<a href="index.html">
-									<img src="assets/img/brand/blue.png">
+									<img src="assets/img/logo_black.png">
 								</a>
 							</div>
 							<div class="col-6 collapse-close">
@@ -71,8 +71,8 @@
 			<center>
 				<div class="card">
 					<div class="card-body">
-						<h1 class="card-title">Flow</h1>
-						<p class="card-text">A workflow management tool <br> Get Started</p>
+						<img src="assets/img/logo_black.png" class="" width="200" alt="..."></a>
+						<p class="card-text pt-2"><br> Get Started today. </p>
 						<button data-toggle="modal" data-target="#modal-signup" class="btn btn-primary">Create an Account</button>
 					</div>
 				</div>
