@@ -77,6 +77,7 @@
 		</div>
 	</nav>
 	<div class="main-content">
+		<!-- Admin -->
 		<?php
 		if ($_SESSION['user_type']==0) {
 			?>
@@ -112,6 +113,7 @@
 		</div>
 		<?php	}
 		?>
+		<!-- Employee -->
 		<?php
 		if ($_SESSION['user_type']==1) {
 		?>
@@ -146,6 +148,41 @@
 		</div>
 		<?php	}
 		?>
+		<!-- Employee -->
+		<?php
+		if ($_SESSION['user_type']==2) {
+		?>
+		<!-- Header -->
+	    <div class="header bg-gradient-primary pb-4 pt-3 pt-md-4">
+	      <div class="container-fluid">
+	        <div class="header-body">
+				<?php
+					if (isset($_SESSION['message'])) {
+						?>
+						<div class="alert alert-<?php echo $_SESSION['mess_type']?>" role="alert">
+							<strong><?php echo $_SESSION['mess_title']?>!</strong> <?php echo $_SESSION['message']?>
+						</div>
+						<?php
+						unset($_SESSION['message']);
+						unset($_SESSION['mess_type']);
+						unset($_SESSION['mess_title']);
+					}
+				?>
+				<div class="jumbotron text-center">
+				    <p class="display-4">Welcome <?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></p>
+				    <hr class="my-4">
+				    <p>No Active Project Found</p>
+				    
+			  	</div>
+
+	        </div>
+	      </div>
+	    </div>
+		<div class="container">
+
+		</div>
+		<?php	}
+		?>
 		<footer class="footer">
 			<div class="container-fluid">
 				<nav class="pull-left" style="float:left;">
@@ -168,7 +205,7 @@
 					</ul>
 				</nav>
 				<div class="copyright" style="float:right;">
-					@2019 Made by Sujit Singh and Shubham
+					@2019 Made by Sujit Singh and Shubham Shirpurkar
 				</div>
 			</div>
 		</footer>
