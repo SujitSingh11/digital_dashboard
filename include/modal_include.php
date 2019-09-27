@@ -3,10 +3,10 @@
         <div class="modal-content">
             <div class="modal-body p-0">
 				<div class="card bg-secondary shadow border-0">
-				    <div class="card-header bg-white pb-5">
-				        <div class="text-muted text-center mb-3"><small>Sign in with your email address.</small></div>
+				    <div class="card-header bg-white pb-2">
+				        <div class="text text-center my-3">Sign in with your email address.</div>
 				    </div>
-				    <div class="card-body px-lg-5 py-lg-5">
+				    <div class="card-body px-lg-5 py-lg-3">
 				        <form role="form">
 				            <div class="form-group mb-3">
 				                <div class="input-group input-group-alternative">
@@ -40,10 +40,10 @@
         <div class="modal-content">
             <div class="modal-body p-0">
 				<div class="card bg-secondary shadow border-0">
-				    <div class="card-header bg-white pb-5">
-				        <div class="text-muted text-center mb-3"><small>Sign up</small></div>
+				    <div class="card-header bg-white pb-2">
+				        <div class="text text-center my-3">Sign up</div>
 				    </div>
-				    <div class="card-body px-lg-5 py-lg-5">
+				    <div class="card-body px-lg-5 py-lg-3">
 				        <form role="form">
 				        	<div class="form-group mb-3">
 				                <div class="input-group input-group-alternative">

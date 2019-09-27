@@ -50,7 +50,7 @@
                     </div>
                     <ul class="navbar-nav ml-lg-auto">
                         <li class="nav-item">
-                            <button class="btn btn-default nav-link" data-toggle="modal" data-target="#modal-login">
+                            <button class="btn btn-default nav-link" data-toggle="modal" data-target="#modal-signup">
                                 Discover
                             </button>
                         </li>
@@ -68,7 +68,9 @@
 
         </div>
         <!--Footer-->
-
+        <?php
+            include 'include/modal_include.php';
+        ?>
 
         <!--JS Include-->
         <?php
