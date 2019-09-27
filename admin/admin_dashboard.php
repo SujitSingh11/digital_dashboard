@@ -1,11 +1,11 @@
 <?php
-    include 'assets/db/connect_db.php';
+    include '../assets/db/connect_db.php';
     session_start();
-    if ($_SESSION['logged_in'] == false) {
+    if ($_SESSION['logged_in'] == false AND $_SESSION['user_type']==0) {
 		$_SESSION['mess_type'] = 'warning';
 		$_SESSION['mess_title'] = 'Warning';
         $_SESSION['message'] = "You are not Signed In.! <br> Please Sign in.";
-        die(header('Location: index.php'));
+        die(header('Location: ../index.php'));
     }
 ?>
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
 	<title>Dashboard | Home for Flow</title>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 	<?php
-		include 'include/css_include.php';
+		include '../include/css_include.php';
 	?>
 </head>
 <body>
@@ -55,6 +55,9 @@
 				<ul class="navbar-nav">
 					<div class="nav-item">
 						<h3><?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></h3>
+						<p>
+							Admin
+						</p>
 					</div>
 					<li class="nav-item">
 						<a class="nav-link  active " href="profile.php"><i class="ni ni-single-02 text-yellow"></i> Profile</a>
@@ -78,14 +81,33 @@
 	</nav>
 	<div class="main-content">
 		<!-- Admin -->
-		<?php
-		if ($_SESSION['user_type']==0) {
-			?>
 
-		<!-- Header -->
-
-      	<div class="container-fluid">
-	        <div class="header-body">
+      	<div class="container-fluid my-5 ">
+			<div class="col">
+				<h1>Dashboard</h1>
+				<hr>
+			</div>
+			<div class="col text-center">
+				<p class="display-4 m-3">Welcome <?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></p>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="jumbotron text-center">
+						<p class="display-4">Manager</p>
+					    <hr class="my-4">
+					    <button class="btn btn-primary " data-toggle="modal" data-target="#modal-add-manager">Create Manager</button>
+						<button class="btn btn-danger " data-toggle="modal" data-target="#modal-remove-manager">Remove Manager</button>
+				  	</div>
+				</div>
+				<div class="col">
+					<div class="jumbotron text-center">
+						<p class="display-4">Department</p>
+					    <hr class="my-4">
+					    <button class="btn btn-primary " data-toggle="modal" data-target="#modal-add-department">Create Department</button>
+						<button class="btn btn-danger " data-toggle="modal" data-target="#modal-remove-department">Remove Department</button>
+				  	</div>
+				</div>
+			</div>
 				<?php
 					if (isset($_SESSION['message'])) {
 						?>
@@ -98,89 +120,11 @@
 						unset($_SESSION['mess_title']);
 					}
 				?>
-				<div class="jumbotron text-center">
-				    <p class="display-4">Welcome <?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></p>
-				    <hr class="my-4">
-				    <p>Create a Manager</p>
-				    <button class="btn btn-primary " data-toggle="modal" data-target="#modal-add-manager">Create</button>
-			  	</div>
-
-	        </div>
 	    </div>
 		<div class="container">
 			<?php include 'include/model_add_manager.php'; ?>
 		</div>
-		<?php	}
-		?>
-		<!-- Manager -->
-		<?php
-		if ($_SESSION['user_type']==1) {
-		?>
-		<!-- Header -->
-	    <div class="header bg-gradient-primary pb-4 pt-3 pt-md-4">
-	      <div class="container-fluid">
-	        <div class="header-body">
-				<?php
-					if (isset($_SESSION['message'])) {
-						?>
-						<div class="alert alert-<?php echo $_SESSION['mess_type']?>" role="alert">
-							<strong><?php echo $_SESSION['mess_title']?>!</strong> <?php echo $_SESSION['message']?>
-						</div>
-						<?php
-						unset($_SESSION['message']);
-						unset($_SESSION['mess_type']);
-						unset($_SESSION['mess_title']);
-					}
-				?>
-				<div class="jumbotron text-center">
-				    <p class="display-4">Welcome <?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></p>
-				    <hr class="my-4">
-				    <p>No Active project found, Create your first Project</p>
-				    <a class="btn btn-primary" href="#" role="button">Create</a>
-			  	</div>
-	        </div>
-	      </div>
-	    </div>
-		<div class="container">
 
-		</div>
-		<?php	}
-		?>
-		<!-- Employee -->
-		<?php
-		if ($_SESSION['user_type']==2) {
-		?>
-		<!-- Header -->
-	    <div class="header bg-gradient-primary pb-4 pt-3 pt-md-4">
-	      <div class="container-fluid">
-	        <div class="header-body">
-				<?php
-					if (isset($_SESSION['message'])) {
-						?>
-						<div class="alert alert-<?php echo $_SESSION['mess_type']?>" role="alert">
-							<strong><?php echo $_SESSION['mess_title']?>!</strong> <?php echo $_SESSION['message']?>
-						</div>
-						<?php
-						unset($_SESSION['message']);
-						unset($_SESSION['mess_type']);
-						unset($_SESSION['mess_title']);
-					}
-				?>
-				<div class="jumbotron text-center">
-				    <p class="display-4">Welcome <?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></p>
-				    <hr class="my-4">
-				    <p>No Active Project Found</p>
-
-			  	</div>
-
-	        </div>
-	      </div>
-	    </div>
-		<div class="container">
-
-		</div>
-		<?php	}
-		?>
 		<footer class="footer">
 			<div class="container-fluid">
 				<nav class="pull-left" style="float:left;">
@@ -214,7 +158,7 @@
         };
 	</script>
 	<?php
-		include 'include/js_include.php';
+		include '../include/js_include.php';
 	?>
 </body>
 </html>

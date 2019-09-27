@@ -30,19 +30,19 @@ else {
 					$result_usertype = $conn->query("SELECT admin_id FROM fl_admin WHERE user_id='{$_SESSION['user_id']}'");
 					$usertype = $result_usertype->fetch_assoc();
 					$_SESSION['admin_id'] = $usertype['admin_id'];
-					header("location: ../home.php");
+					header("location: ../admin/admin_dashboard.php");
 				}
 				elseif ($_SESSION['user_type'] == 1) {
 					$result_usertype = $conn->query("SELECT employee_id FROM fl_employee WHERE user_id='{$_SESSION['user_id']}'");
 					$usertype = $result_usertype->fetch_assoc();
 					$_SESSION['employee_id'] = $usertype['employee_id'];
-					header("location: ../home.php");
+					header("location: ../manager/manager_dashboard.php");
 				}
 				elseif ($_SESSION['user_type'] == 2) {
 					$result_usertype = $conn->query("SELECT manager_id FROM fl_manager WHERE user_id='{$_SESSION['user_id']}'");
 					$usertype = $result_usertype->fetch_assoc();
 					$_SESSION['manager_id'] = $usertype['manager_id'];
-					header("location: ../home.php");
+					header("location: ..employee/employee_dashboard.php");
 				}
 			}
 		}
