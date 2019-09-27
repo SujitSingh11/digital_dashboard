@@ -94,7 +94,7 @@
 				<hr>
 			</div>
 			<div class="col text-center">
-				<p class="display-4 m-3">Welcome <?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></p>
+				<p class="display-4 m-3">Welcome, <?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'].'.'; ?></p>
 			</div>
                 <?php
 					if (isset($_SESSION['message'])) {
