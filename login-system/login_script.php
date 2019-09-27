@@ -1,5 +1,5 @@
 <?php
-require '../db/database.php';
+require '../assets/db/connect_db.php';
 session_start();
 
 $email = mysqli_real_escape_string($conn,$_POST['email']);
@@ -23,7 +23,7 @@ else {
 			$_SESSION['user_type'] = $user['user_type'];
 			$_SESSION['logged_in'] = true;
 			$user['login_counter'] +=1;
-			$counter = $user['login_counter']
+			$counter = $user['login_counter'];
 			$sql_counter_inc = $conn->query("INSERT INTO fl_user (login_counter) VALUES('$counter')");
 			if ($sql_counter_inc) {
 				if ($_SESSION['user_type'] == 0) {
@@ -47,9 +47,9 @@ else {
 			}
 		}
 		else{
-			$_SESSION['mess_type'] = 'danger';
-			$_SESSION['mess_title'] = 'Error';
-			$_SESSION['message'] = 'User with that email does not exist!';
+			$_SESSION['mess_type'] = 'warning';
+			$_SESSION['mess_title'] = 'Warning';
+			$_SESSION['message'] = 'Email havn\'t been verified!';
 			header("location: ../index.php");
 		}
 
