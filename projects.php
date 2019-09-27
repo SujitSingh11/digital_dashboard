@@ -57,10 +57,10 @@
 						<h3><?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></h3>
 					</div>
 					<li class="nav-item">
-						<a class="nav-link  active " href="profile.php"><i class="ni ni-single-02 text-yellow"></i> Profile</a>
+						<a class="nav-link" href="profile.php"><i class="ni ni-single-02 text-yellow"></i> Profile</a>
 					</li>
 					<li class="nav-item  class=" active>
-						<a class=" nav-link " href="dashboard.php"><i class="ni ni-tv-2 text-primary"></i> Dashboard</a>
+						<a class=" nav-link active" href="home.php"><i class="ni ni-tv-2 text-primary"></i> Dashboard</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link " href="projects.php"><i class="ni ni-planet text-blue"></i> Projects</a>
