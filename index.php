@@ -69,7 +69,7 @@
 				<?php
 					if (isset($_SESSION['message'])) {
 						?>
-						<div class="alert alert-success" role="alert">
+						<div class="alert alert-<?php $_SESSION['mess_type']?>" role="alert">
 							<strong><?php $_SESSION['mess_title']?>!</strong> <?php $_SESSION['message']?>
 						</div>
 						<?php
