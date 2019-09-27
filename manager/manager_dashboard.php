@@ -26,7 +26,7 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<a class="navbar-brand pt-0" href="index.html">
-				<img src="assets/img/logo_black.png" class="navbar-brand-img" alt="...">
+				<img src="../assets/img/logo_black.png" class="navbar-brand-img" alt="...">
 			</a>
 			<ul class="nav align-items-center d-md-none">
 				<li class="nav-item dropdown">
@@ -40,7 +40,7 @@
 					<div class="row">
 						<div class="col-6 collapse-brand">
 							<a href="index.html">
-								<img src="assets/img/logo_black.png" class="navbar-brand-img" alt="...">
+								<img src="../assets/img/logo_black.png" class="navbar-brand-img" alt="...">
 							</a>
 						</div>
 						<div class="col-6 collapse-close">
