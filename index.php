@@ -87,9 +87,10 @@
 			<center>
 				<div class="card">
 					<div class="card-body">
-						<img src="assets/img/logo_black.png" class="" width="200" alt="..."></a>
-						<p class="card-text pt-2"><br> Get Started today. </p>
-						<button data-toggle="modal" data-target="#modal-signup" class="btn btn-primary">Create an Account</button>
+						<img src="assets/img/logo_black.png" class="m-4" width="200" alt="..."></a>
+						
+						<p class="card-text p-2"><br>Flow makes managing projects as easy as taking a walk in the park.<br>Get Started Today!</p>
+						<button data-toggle="modal" data-target="#modal-signup" class="mt-4 btn btn-primary">Create an Account</button>
 					</div>
 				</div>
 			</center>
