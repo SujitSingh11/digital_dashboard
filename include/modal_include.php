@@ -57,14 +57,6 @@
 							<div class="form-group mb-3">
 								<div class="input-group input-group-alternative">
 									<div class="input-group-prepend">
-										<span class="input-group-text"><i class="ni ni-tie-bow"></i></span>
-									</div>
-									<input class="form-control" placeholder="Date of Birth" name="dob" id="dob" type="date">
-								</div>
-							</div>
-							<div class="form-group mb-3">
-								<div class="input-group input-group-alternative">
-									<div class="input-group-prepend">
 										<span class="input-group-text"><i class="ni ni-email-83"></i></span>
 									</div>
 									<input class="form-control" placeholder="Email" name="email" type="email">

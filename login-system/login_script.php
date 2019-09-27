@@ -1,5 +1,4 @@
 <?php
-
 require '../db/database.php';
 session_start();
 
@@ -7,28 +6,26 @@ $email = mysqli_real_escape_string($conn,$_POST['email']);
 $result = $conn->query("SELECT * FROM fl_user WHERE email='$email'");
 
 if ( $result->num_rows == 0 ){
-			$_SESSION['mess_type'] = 'danger';
-			$_SESSION['mess_title'] = 'Error';
-			$_SESSION['message'] = 'User with that email does not exist!';
-			header("location: ../index.php");
+		$_SESSION['mess_type'] = 'danger';
+		$_SESSION['mess_title'] = 'Error';
+		$_SESSION['message'] = 'User with that email does not exist!';
+		header("location: ../index.php");
 }
 else {
-	 
+
 	$user = $result->fetch_assoc();
-	
+
 	if ( password_verify($_POST['password'], $user['password'])) {
 		if ($user['active'] == 1) {
 			$_SESSION['user_id'] = $user['user_id'];
 			$_SESSION['email'] = $user['email'];
 			$_SESSION['first_name'] = $user['first_name'];
-			$_SESSION['dob'] = $user['dob'];
 			$_SESSION['last_name'] = $user['last_name'];
 			$_SESSION['active'] = $user['active'];
 			$_SESSION['user_type'] = $user['user_type'];
-
 			$_SESSION['logged_in'] = true;
-
-			if($user['login_counter' == 0])
+			$user['login_counter'] +=1; 
+			if($user['login_counter' == 1])
 			{
 				$loginplus= $conn->query("UPDATE 'fl_user' SET 'login_counter' = '1'");
 			}
