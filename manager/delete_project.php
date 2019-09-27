@@ -17,14 +17,14 @@ if($slc_prj->num_rows > 0 ) {
 		$_SESSION['mess_type'] = 'success';
 		$_SESSION['mess_title'] = 'Project Deleted';
 		$_SESSION['message'] = 'Project successfully deleted!';
-		header("location: ../project.php");
+		header("location: manager_dashboard.php");
 	}
 	else
 	{
 		$_SESSION['mess_type'] = 'danger';
 		$_SESSION['mess_title'] = 'Error';
 		$_SESSION['message'] = 'Project could not be deleted! Contact SysAdmin.';
-		header("location: ../project.php");
+		header("location: manager_dashboard.php");
 	}
   
 }
@@ -32,8 +32,8 @@ else
 {
 	$_SESSION['mess_type'] = 'danger';
 	$_SESSION['mess_title'] = 'Error';
-	$_SESSION['message'] = 'Project could not be deleted! Contact SysAdmin.';
-	header("location: ../project.php");
+	$_SESSION['message'] = 'Project could not be deleted! Contact SysAdmin.'.$project_id;
+	header("location: manager_dashboard.php");
 }
 
 ?>
