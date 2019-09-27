@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2019 at 10:32 AM
+-- Generation Time: Sep 27, 2019 at 11:49 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -45,6 +45,13 @@ CREATE TABLE `fl_employee` (
   `ID` int(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `fl_employee`
+--
+
+INSERT INTO `fl_employee` (`employee_id`, `user_id`, `dep_id`, `ID`) VALUES
+(3, 3, 0, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -67,7 +74,6 @@ CREATE TABLE `fl_user` (
   `user_id` int(11) NOT NULL,
   `first_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
-  `dob` date NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `hash` varchar(100) NOT NULL,
@@ -76,6 +82,14 @@ CREATE TABLE `fl_user` (
   `login_counter` int(100) NOT NULL DEFAULT '0',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fl_user`
+--
+
+INSERT INTO `fl_user` (`user_id`, `first_name`, `last_name`, `email`, `password`, `hash`, `user_type`, `active`, `login_counter`, `create_time`) VALUES
+(3, 'Sujit', 'Singh', 'sujitkumarsingh29@gmail.com', '$2y$10$2x.8AsKbn6zJz30lAXODCuuc38OfN60ib3ihdrGfDfocYusnO1w8q', '8df707a948fac1b4a0f97aa554886ec8', 2, 1, 0, '2019-09-27 14:43:59'),
+(4, '', '', '', '', '', 0, 0, 1, '2019-09-27 15:03:19');
 
 --
 -- Indexes for dumped tables
@@ -118,7 +132,7 @@ ALTER TABLE `fl_admin`
 -- AUTO_INCREMENT for table `fl_employee`
 --
 ALTER TABLE `fl_employee`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `fl_manager`
 --
@@ -128,7 +142,7 @@ ALTER TABLE `fl_manager`
 -- AUTO_INCREMENT for table `fl_user`
 --
 ALTER TABLE `fl_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
