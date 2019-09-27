@@ -31,8 +31,8 @@
             $sql_employee = mysqli_query($conn,"SELECT user_id from fl_user WHERE email='$email'");
 
             if ($sql_employee->num_rows > 0) {
-                $user_id_fetch = mysqli_fetch_assoc($result_userid);
-                $user_id = (int) $user_id_fetch['user_id'];
+                $user_id_fetch = mysqli_fetch_assoc($sql_employee);
+                $user_id = $user_id_fetch['user_id'];
                 $sql_emp_user_id = "INSERT INTO fl_employee (user_id) VALUES ($user_id)";
                 $query_emp_user_id = mysqli_query($conn,$sql_emp_user_id);
             }else {
