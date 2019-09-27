@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2019 at 07:41 AM
+-- Generation Time: Sep 27, 2019 at 10:32 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -70,6 +70,8 @@ CREATE TABLE `fl_user` (
   `dob` date NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
+  `hash` varchar(100) NOT NULL,
+  `user_type` tinyint(5) NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '0',
   `login_counter` int(100) NOT NULL DEFAULT '0',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP

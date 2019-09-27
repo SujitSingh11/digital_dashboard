@@ -25,10 +25,9 @@
             $_SESSION['mess_title'] = 'Error';
             $_SESSION['message'] = 'User with this email already exists!';
             header("location: ../index.php");
-        }
-        else {
-            $sql_users = "INSERT INTO users ( `first_name`, `last_name`, `dob`, `email`, `password`, `hash`,`user_type`)
-            VALUES ('$first_name','$last_name','$dob','$email','$password', '$hash','$user_type')";
+        }else {
+            $sql_users = "INSERT INTO fl_users ( `first_name`, `last_name`, `dob`, `email`, `password`,`hash`,`user_type`)
+            VALUES ('$first_name','$last_name','$dob','$email','$password','$hash','$user_type')";
             $query_users = mysqli_query($conn,$sql_users);
 
             $sql_employee = $conn->query("SELECT user_id from fl_user WHERE email='$email'");
@@ -37,12 +36,11 @@
                 $user_id = (int) $user_id_fetch['user_id'];
                 $sql_emp_user_id = "INSERT INTO fl_employee (user_id) VALUES ($user_id)";
                 $query_emp_user_id = mysqli_query($conn,$sql_emp_user_id);
-            }
-            else {
+            }else {
                 $_SESSION['mess_type'] = 'danger';
                 $_SESSION['mess_title'] = 'Error';
                 $_SESSION['message'] = 'Failed to add employee!';
-                header("location: ../index.php");
+            //    header("location: ../index.php");
             }
             if ($query){
                 $_SESSION['mess_type'] = 'Success';
@@ -86,9 +84,9 @@
                     echo 'Message could not be sent.';
                     echo 'Mailer Error: ' . $mail->ErrorInfo;
                 }
+            }
         }
-    }
-    else {
+    }else {
         $_SESSION['mess_type'] = 'danger';
         $_SESSION['mess_title'] = 'Error';
         $_SESSION['message'] = 'Password dont match Please try Again!';

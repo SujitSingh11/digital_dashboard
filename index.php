@@ -14,7 +14,7 @@
 		?>
 		<style media="screen">
 			body {
-				background-image: url("assets/img/bg2.jpg");
+				background-image: url("assets/img/.jpg");
 				height: 100;
 				background-position: center;
 				background-repeat: no-repeat;
@@ -26,7 +26,7 @@
 	</head>
 	<body>
 		<!--Navbar-->
-		<nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark bg-default">
+		<nav class="navbar py-1 navbar-horizontal navbar-expand-lg navbar-dark bg-default">
 			<div class="container">
 				<a class="navbar-brand" href="#">FLOW</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,10 +69,13 @@
 				<?php
 					if (isset($_SESSION['message'])) {
 						?>
-						<div class="alert alert-<?php $_SESSION['mess_type']?>" role="alert">
-							<strong><?php $_SESSION['mess_title']?>!</strong> <?php $_SESSION['message']?>
+						<div class="alert alert-<?php echo $_SESSION['mess_type']?>" role="alert">
+							<strong><?php echo $_SESSION['mess_title']?>!</strong> <?php echo $_SESSION['message']?>
 						</div>
 						<?php
+						unset($_SESSION['message']);
+						unset($_SESSION['mess_type']);
+						unset($_SESSION['mess_title']);
 					}
 				?>
 			</div>
