@@ -108,7 +108,7 @@
 			</div>
 			<div class="container">
 				<div class="mt-3">
-					<div class="col-10 md-5 offset-1">
+					<div class="col-12 md-5 ">
 						<div class="card ">
 							<h2 class="card-title m-2 p-3">Projects</h2>
 							<hr>
@@ -146,7 +146,7 @@
 													  <input type="hidden" name="user_id" value="<?=$row_project['user_id']?>">
 													  <input type="hidden" name="m_id" value="<?=$row_project['m_id']?>">
 													  <input type="hidden" name="project_id" value="<?=$row_project['project_id']?>">
-													  <button class="btn btn-secondary" type="button">View</button>
+													  <button class="btn btn-secondary" type="submit">View</button>
 												  </form>
 											  </td>
 										  </tr>

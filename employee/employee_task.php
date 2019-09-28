@@ -8,11 +8,7 @@
         die(header('Location: ../index.php'));
     }
     $employee_id = $_SESSION['employee_id'];
-    $sql_project = "SELECT fl_project.project_id AS project_id, fl_manager.manager_id AS m_id, fl_project.project_name AS name, fl_project.project_desc AS p_desc,
-	fl_project.deadline AS deadline, fl_project.time_created AS created
-			FROM fl_project
-			INNER JOIN fl_manager ON fl_manager.manager_id = fl_project.manager_id";
-	$query_project = mysqli_query($conn,$sql_project);
+
 
 ?>
 <!DOCTYPE html>
@@ -108,9 +104,9 @@
 			</div>
             <div class="container">
                 <div class="mt-3">
-                    <div class="col-10 md-5 offset-1">
+                    <div class="col-12 md-5">
                         <div class="card my-3 border-danger">
-							<h2 class="card-title bg-danger m-2 p-3">Task</h2>
+							<h2 class="card-title bg-danger m-2 p-3">Avaliable Task</h2>
 							<hr>
 							<div class="card-body p-2 m-2">
 								<table class="table">

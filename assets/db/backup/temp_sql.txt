@@ -5,3 +5,8 @@ CREATE TABLE `flow`.`fl_employee` ( `employee_id` INT NOT NULL AUTO_INCREMENT , 
 CREATE TABLE `flow`.`fl_manager` ( `manager_id` INT NOT NULL AUTO_INCREMENT , `user_id` INT(100) NOT NULL , `ID` INT(100) NULL DEFAULT NULL , PRIMARY KEY (`manager_id`)) ENGINE = InnoDB;
 
 CREATE TABLE `flow`.`fl_admin` ( `admin_id` INT NOT NULL AUTO_INCREMENT , `user_id` INT(100) NOT NULL , `ID` INT NULL DEFAULT NULL , PRIMARY KEY (`admin_id`)) ENGINE = InnoDB;
+
+SELECT fl_project.project_id AS project_id, fl_task.task_id AS task_id, fl_project.project_name AS name, fl_project.project_desc AS p_desc,
+fl_project.deadline AS deadline, fl_project.time_created AS created, fl_task.task_description AS task_decp, fl_task.task_status AS task_status
+			FROM fl_project
+			INNER JOIN fl_task ON fl_task.project_id = fl_project.project_id
