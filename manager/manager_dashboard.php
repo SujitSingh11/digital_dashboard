@@ -69,10 +69,10 @@
 						<a class="nav-link  active " href="manager_profile.php"><i class="ni ni-single-02 text-yellow"></i> Profile</a>
 					</li>
 					<li class="nav-item ">
-						<a class=" nav-link " href="dashboard.php"><i class="ni ni-tv-2 text-primary"></i> Dashboard</a>
+						<a class=" nav-link " href="manager_dashboard.php"><i class="ni ni-tv-2 text-primary"></i> Dashboard</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link " href="projects.php"><i class="ni ni-planet text-blue"></i> Projects</a>
+						<a class="nav-link " href=""><i class="ni ni-planet text-blue"></i> Projects</a>
 					</li>
 				</ul>
 				<!-- Divider -->
@@ -172,7 +172,7 @@
 																				<div class="text text-center my-3">Edit a project</div>
 																			</div>
 																			<div class="card-body px-lg-5 py-lg-3">
-																				<form role="form" method="post" action="manager/edit_project.php">
+																				<form role="form" method="post" action="edit_project.php">
 																					<div class="form-group mb-3">
 																						<div class="input-group input-group-alternative">
 																							<div class="input-group-prepend">
