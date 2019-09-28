@@ -66,7 +66,7 @@
 						</p>
 					</div>
 					<li class="nav-item">
-						<a class="nav-link  active " href="profile.php"><i class="ni ni-single-02 text-yellow"></i> Profile</a>
+						<a class="nav-link  active " href="manager_profile.php"><i class="ni ni-single-02 text-yellow"></i> Profile</a>
 					</li>
 					<li class="nav-item ">
 						<a class=" nav-link " href="dashboard.php"><i class="ni ni-tv-2 text-primary"></i> Dashboard</a>

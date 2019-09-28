@@ -96,7 +96,7 @@
 				<?php
 					if (isset($_SESSION['message'])) {
 						?>
-						<div class="alert alert-<?php echo $_SESSION['mess_type']?>" role="alert">
+						<div class="alert alert-dismissible fade show alert-<?php echo $_SESSION['mess_type']?>" role="alert">
 							<strong><?php echo $_SESSION['mess_title']?>!</strong> <?php echo $_SESSION['message']?>
 						</div>
 						<?php
