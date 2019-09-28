@@ -10,17 +10,8 @@
 	// $sql_project = "SELECT fl_project.project_id AS project_id, fl_project.manager_id AS m_id, fl_project.project_name AS name, fl_project.project_desc AS p_desc, fl_project.deadline AS deadline, fl_project.time_created AS created, fl_task.task_id AS t_id, fl_task.task_description AS t_desc,
 	// 		FROM fl_project
 	// 		INNER JOIN fl_task ON fl_project.project_id = fl_task.project_id";
-	
-	$project_id = $_POST['project_id'];
-	$sql_project = "SELECT * FROM fl_project WHERE project_id = '$project_id'";
-	$query_project = mysqli_query($conn,$sql_project);
 
-	$user_id = $_SESSION['user_id'];
-	$sql_manname = "SELECT first_name, last_name FROM fl_user WHERE user_id = '$user_id'";
-	$query_manname = mysqli_query($conn,$sql_manname);
 
-	$sql_task= "SELECT * FROM fl_task WHERE project_id = '$project_id'";
-	$query_task = mysqli_query($conn,$sql_task);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -119,7 +110,7 @@
 						<br>
 						<h4 class="text-muted">
 						<?php
-							echo "Managed by ".$row_manname['first_name'].' '.$row_manname['last_name'];	
+							echo "Managed by ".$row_manname['first_name'].' '.$row_manname['last_name'];
 					}
 					?></h4></p>
 					<hr class="my-4">
