@@ -163,14 +163,56 @@
 													</td>
 
 													<td>
-														<form class="form-button-action" action="edit_project.php" method="POST">
-															<input type="hidden" name="user_id" value="<?=$row_project['user_id']?>">
-															<input type="hidden" name="m_id" value="<?=$row_project['m_id']?>">
-															<input type="hidden" name="project_id" value="<?=$row_project['project_id']?>">
-															<button type="submit" data-toggle="modal" data-target="#modal-create-project" name="view" class="btn btn-link btn-primary p-1" data-original-title="View Project">
-																<i class="fa fa-edit"></i>
-															</button>
-														</form>
+														<div class="modal fade" id="modal-edit-project-<?=$no?>" tabindex="-1" role="dialog" aria-labelledby="modal-edit-project-<?=$no?>" aria-hidden="true">
+															<div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+																<div class="modal-content">
+																	<div class="modal-body p-0">
+																		<div class="card bg-secondary shadow border-0">
+																			<div class="card-header bg-white pb-2">
+																				<div class="text text-center my-3">Edit a project</div>
+																			</div>
+																			<div class="card-body px-lg-5 py-lg-3">
+																				<form role="form" method="post" action="manager/edit_project.php">
+																					<div class="form-group mb-3">
+																						<div class="input-group input-group-alternative">
+																							<div class="input-group-prepend">
+																								<span class="input-group-text"><i class="ni ni-books"></i></span>
+																							</div>
+																							<input class="form-control" placeholder="Project Name" id="project_name" name="project_name" type="text" value="<?=$row_project['name']?>">
+																						</div>
+																					</div>
+																					<div class="form-group mb-3">
+																						<div class="input-group input-group-alternative">
+																							<div class="input-group-prepend">
+																								<span class="input-group-text"><i class="ni ni-bullet-list-67"></i></span>
+																							</div>
+																							<textarea class="form-control" placeholder="project_description" name="project_description"><?= $row_project['p_desc']?> </textarea>
+																						</div>
+																					</div>
+																					<div class="form-group">
+																						<div class="input-group input-group-alternative">
+																							<div class="input-group-prepend">
+																								<span class="input-group-text"><i class="ni ni-watch-time"></i></span>
+																							</div>
+																							<input class="form-control" placeholder="Select Deadline" name="deadline" id="deadline" type="date" value="<?=$row_project['deadline']?>">
+																						</div>
+																					</div>
+																					<div class="text-center">
+																						<button type="submit" class="btn btn-primary my-4">Save Project</button>
+																					</div>
+																				</form>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<input type="hidden" name="user_id" value="<?=$row_project['user_id']?>">
+														<input type="hidden" name="m_id" value="<?=$row_project['m_id']?>">
+														<input type="hidden" name="project_id" value="<?=$row_project['project_id']?>">
+														<button type="submit" data-toggle="modal" data-target="#modal-edit-project-<?=$no?>" name="view" class="btn btn-link btn-primary p-1" data-original-title="View Project">
+															<i class="fa fa-edit"></i>
+														</button>
 													</td>
 													<td>
 														<form class="form-button-action" action="delete_project.php" method="POST">
