@@ -147,11 +147,15 @@
 													  <input type="hidden" name="m_id" value="<?=$row_project['m_id']?>">
 													  <input type="hidden" name="project_id" value="<?=$row_project['project_id']?>">
 
-													  <select>
-														<option value="Select" default disabled></option>
-														<option value="On Hold"></option>
-														<option value="Completed"></option>
-													  </select>
+														<div class="dropdown">
+														  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+														    Status
+														  </button>
+															<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+														    	<a class="dropdown-item" href="#">On Hold</a>
+														    	<a class="dropdown-item" href="#">Completed</a>
+															</div>
+														</div>
 												  </form>
 											  </td>
 										  </tr>
@@ -203,11 +207,15 @@
 													  <input type="hidden" name="user_id" value="<?=$row_project['user_id']?>">
 													  <input type="hidden" name="m_id" value="<?=$row_project['m_id']?>">
 													  <input type="hidden" name="project_id" value="<?=$row_project['project_id']?>">
-													  <select>
-														<option value="Select" default disabled></option>
-														<option value="Ongoing"></option>
-														<option value="Completed"></option>
-													  </select>
+														<div class="dropdown">
+														  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+														    Status
+														  </button>
+															<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+														    	<a class="dropdown-item" href="#">Ongoing</a>
+														    	<a class="dropdown-item" href="#">Completed</a>
+															</div>
+														</div>
 												  </form>
 											  </td>
 										  </tr>
@@ -260,11 +268,15 @@
 													  <input type="hidden" name="m_id" value="<?=$row_project['m_id']?>">
 													  <input type="hidden" name="project_id" value="<?=$row_project['project_id']?>">
 
-													  <select>
-														<option value="Select" default disabled></option>
-														<option value="Ongoing"></option>
-														<option value="On Hold"></option>
-													  </select>
+														<div class="dropdown">
+														  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+														    Status
+														  </button>
+															<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+														    	<a class="dropdown-item" href="#">Ongoing</a>
+														    	<a class="dropdown-item" href="#">On Hold</a>
+															</div>
+														</div>
 												  </form>
 											  </td>
 										  </tr>
