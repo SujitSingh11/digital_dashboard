@@ -89,7 +89,7 @@
 	</nav>
 	<div class="main-content">
 	    <div class="container-fluid mt-5">
-            <h1>Projects :</h1>
+            <h1>Task :</h1>
             <hr>
 	        <div class="header-body">
 				<?php
@@ -109,59 +109,125 @@
             <div class="container">
                 <div class="mt-3">
                     <div class="col-10 md-5 offset-1">
-                        <div class="card">
-                            <h2 class="card-title m-2 p-3">Projects</h2>
-                            <hr>
-                            <div class="card-body p-2 m-2">
-                                <table class="table">
-                                  <thead class="thead-light">
-                                    <tr>
-                                      <th scope="col">#</th>
-                                      <th scope="col">Project</th>
-                                      <th scope="col">Decription</th>
-                                      <th scope="col">Created By</th>
-                                      <th scope="col">Deadline</th>
-                                      <th scope="col">Action</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                      <?php
-                                          $no = 1;
-                                          while ($row_project = mysqli_fetch_assoc($query_project)) {
-                                              $m_id=$row_project['m_id'];
-                                              $sql_manager_name = mysqli_fetch_assoc(mysqli_query($conn,"SELECT fl_user.user_id AS user_id, fl_manager.manager_id AS m_id, fl_user.first_name AS fname, fl_user.last_name AS lname
-                                          			FROM fl_user
-                                          			INNER JOIN fl_manager ON fl_manager.user_id = fl_user.user_id WHERE manager_id = $m_id"));
-                                      ?>
-                                          <tr>
-                                              <td><?= $no ?></td>
-                                              <td><?= $row_project['name']?></td>
-                                              <td><?= $row_project['p_desc']?></td>
-                                              <td><?= $sql_manager_name['fname'].' '.$sql_manager_name['lname']?></td>
-                                              <td><?= $row_project['deadline']?>
-                                              </td>
+                        <div class="card my-3 border-danger">
+							<h2 class="card-title bg-danger m-2 p-3">Task</h2>
+							<hr>
+							<div class="card-body p-2 m-2">
+								<table class="table">
+								  <thead class="thead-light">
+									<tr>
+									  <th scope="col">#</th>
+									  <th scope="col">Project</th>
+									  <th scope="col">Description</th>
+									  <th scope="col">Created By</th>
+									  <th scope="col">Deadline</th>
+									  <th scope="col">Action</th>
+									</tr>
+								  </thead>
+								  <tbody>
+									  <?php
+										  $no = 1;
+										  while ($row_project = mysqli_fetch_assoc($query_project)) {
+											  $m_id=$row_project['m_id'];
+											  $sql_manager_name = mysqli_fetch_assoc(mysqli_query($conn,"SELECT fl_user.user_id AS user_id, fl_manager.manager_id AS m_id, fl_user.first_name AS fname, fl_user.last_name AS lname
+													FROM fl_user
+													INNER JOIN fl_manager ON fl_manager.user_id = fl_user.user_id WHERE manager_id = $m_id"));
+									            ?>
+										  <tr>
+											  <td><?= $no ?></td>
+											  <td><?= $row_project['name']?></td>
+											  <td><?= $row_project['p_desc']?></td>
+											  <td><?= $sql_manager_name['fname'].' '.$sql_manager_name['lname']?></td>
+											  <td><?= $row_project['deadline']?>
+											  </td>
 
-                                              <td>
-                                                  <form class="form-button-action" action="employee_task.php" method="POST">
-                                                      <input type="hidden" name="user_id" value="<?=$row_project['user_id']?>">
-                                                      <input type="hidden" name="m_id" value="<?=$row_project['m_id']?>">
-                                                      <input type="hidden" name="project_id" value="<?=$row_project['project_id']?>">
-                                                      <button type="submit" data-toggle="tooltip" name="view" class="btn btn-link btn-primary p-1" data-original-title="View Project">
-                                                          <i class="fa fa-eye"></i>
-                                                      </button>
-                                                  </form>
-                                              </td>
-                                          </tr>
-                                      <?php
-                                          $no++;
+											  <td>
+												  <form class="form-button-action" action="employee_task.php" method="POST">
+													  <input type="hidden" name="user_id" value="<?=$row_project['user_id']?>">
+													  <input type="hidden" name="m_id" value="<?=$row_project['m_id']?>">
+													  <input type="hidden" name="project_id" value="<?=$row_project['project_id']?>">
+														<div class="dropdown">
+														  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+														    Status
+														  </button>
+															<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+														    	<a class="dropdown-item" href="#">Ongoing</a>
+														    	<a class="dropdown-item" href="#">Completed</a>
+															</div>
+														</div>
+												  </form>
+											  </td>
+										  </tr>
+									  <?php
+										  $no++;
+										  }
+									  ?>
+								  </tbody>
+								</table>
 
-                                          }
-                                      ?>
-                                  </tbody>
-                                </table>
+							</div>
+						</div>
 
-                            </div>
-                        </div>
+						<div class="card my-3 border-success">
+							<h2 class="card-title bg-success m-2 p-3">Completed</h2>
+							<hr>
+							<div class="card-body p-2 m-2">
+								<table class="table">
+								  <thead class="thead-light">
+									<tr>
+									  <th scope="col">#</th>
+									  <th scope="col">Project</th>
+									  <th scope="col">Description</th>
+									  <th scope="col">Created By</th>
+									  <th scope="col">Deadline</th>
+									  <th scope="col">Action</th>
+									</tr>
+								  </thead>
+								  <tbody>
+									  <?php
+										  $no = 1;
+										  while ($row_project = mysqli_fetch_assoc($query_project)) {
+											  $m_id=$row_project['m_id'];
+											  $sql_manager_name = mysqli_fetch_assoc(mysqli_query($conn,"SELECT fl_user.user_id AS user_id, fl_manager.manager_id AS m_id, fl_user.first_name AS fname, fl_user.last_name AS lname
+													FROM fl_user
+													INNER JOIN fl_manager ON fl_manager.user_id = fl_user.user_id WHERE manager_id = $m_id"));
+									  ?>
+										  <tr>
+											  <td><?= $no ?></td>
+											  <td><?= $row_project['name']?></td>
+											  <td><?= $row_project['p_desc']?></td>
+											  <td><?= $sql_manager_name['fname'].' '.$sql_manager_name['lname']?></td>
+											  <td><?= $row_project['deadline']?>
+											  </td>
+
+											  <td>
+												  <form class="form-button-action" action="employee_task.php" method="POST">
+													  <input type="hidden" name="user_id" value="<?=$row_project['user_id']?>">
+													  <input type="hidden" name="m_id" value="<?=$row_project['m_id']?>">
+													  <input type="hidden" name="project_id" value="<?=$row_project['project_id']?>">
+
+														<div class="dropdown">
+														  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+														    Status
+														  </button>
+															<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+														    	<a class="dropdown-item" href="#">Ongoing</a>
+														    	<a class="dropdown-item" href="#">On Hold</a>
+															</div>
+														</div>
+												  </form>
+											  </td>
+										  </tr>
+									  <?php
+										  $no++;
+
+										  }
+									  ?>
+								  </tbody>
+								</table>
+
+							</div>
+						</div>
                     </div>
                 </div>
             </div>
