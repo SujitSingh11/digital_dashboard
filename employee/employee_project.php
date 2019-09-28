@@ -109,8 +109,8 @@
 			<div class="container">
 				<div class="mt-3">
 					<div class="col-10 md-5 offset-1">
-						<div class="card border-warning">
-							<h2 class="card-title bg-warning m-2 p-3">Ongoing</h2>
+						<div class="card ">
+							<h2 class="card-title m-2 p-3">Projects</h2>
 							<hr>
 							<div class="card-body p-2 m-2">
 								<table class="table">
@@ -148,13 +148,9 @@
 													  <input type="hidden" name="project_id" value="<?=$row_project['project_id']?>">
 
 														<div class="dropdown">
-														  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-														    Status
+														  <button class="btn btn-secondary" type="button" aria-expanded="false">
+														    View
 														  </button>
-															<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-														    	<a class="dropdown-item" href="#">On Hold</a>
-														    	<a class="dropdown-item" href="#">Completed</a>
-															</div>
 														</div>
 												  </form>
 											  </td>
