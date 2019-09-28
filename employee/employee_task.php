@@ -136,7 +136,6 @@
 											  <td><?= $sql_manager_name['fname'].' '.$sql_manager_name['lname']?></td>
 											  <td><?= $row_project['deadline']?>
 											  </td>
-
 											  <td>
 												  <form class="form-button-action" action="employee_task.php" method="POST">
 													  <input type="hidden" name="user_id" value="<?=$row_project['user_id']?>">
@@ -160,7 +159,6 @@
 									  ?>
 								  </tbody>
 								</table>
-
 							</div>
 						</div>
 
