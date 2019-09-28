@@ -186,6 +186,7 @@
 			<?php
 		}
 		include '../include/modal_project.php'; ?>
+		include '../include/modal_task.php';
 		</div>
 		<footer class="footer">
 			<div class="container-fluid">

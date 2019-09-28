@@ -73,21 +73,13 @@
 							<div class="form-group">
 								<div class="input-group input-group-alternative">
 									<div class="input-group-prepend">
-										<span class="input-group-text"><i class="ni ni-building"></i></span>
-									</div>
-									<input class="form-control" id="dept_id" name="dept_id" type="hidden" value="<?php $_SESSION['dept_id'] ?>">
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="input-group input-group-alternative">
-									<div class="input-group-prepend">
 										<span class="input-group-text"><i class="ni ni-watch-time"></i></span>
 									</div>
 									<input class="form-control" placeholder="Select Deadline" name="deadline" id="deadline" type="date" value="<?php $_SESSION['deadline'] ?>">
 								</div>
 							</div>
 							<div class="text-center">
-								<button type="submit" class="btn btn-primary my-4">Create Project</button>
+								<button type="submit" class="btn btn-primary my-4">Save Project</button>
 							</div>
 						</form>
 					</div>
