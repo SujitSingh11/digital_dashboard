@@ -12,6 +12,7 @@
 	 		INNER JOIN fl_task ON fl_project.project_id = fl_task.project_id";
 
 	$project_id = $_POST['project_id'];
+	$_SESSION['project_id'] = $project_id;
 	$sql_project = "SELECT * FROM fl_project WHERE project_id = '$project_id'";
 	$query_project = mysqli_query($conn,$sql_project);
 
@@ -135,7 +136,7 @@
 
 					?>
 					<p>No Active tasks found, Create the first task</p>
-					<button class="btn btn-primary" data-toggle="modal" data-target="#modal-create-task">Create Task</button>
+					<button class="btn btn-primary" data-toggle="modal" data-target="#modal-create-task">Create Task</> <button>
 				</div>
 			</div>
 		  </div>
@@ -147,10 +148,13 @@
 
 		?>
 		<div class="container">
+
 			<div class="row m-5">
 					<div class="col-md-12">
+						
 						<div class="card">
 							<div class="card-body">
+								
 								<div class="table-responsive">
 									<table id="add-row" class="display table table-striped table-hover" >
 										<thead>
