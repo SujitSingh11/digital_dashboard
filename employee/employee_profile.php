@@ -1,7 +1,7 @@
 <?php
 	include '../assets/db/connect_db.php';
 	session_start();
-	if ($_SESSION['logged_in'] == false AND $_SESSION['user_type']==0) {
+	if ($_SESSION['logged_in'] == false AND $_SESSION['user_type']==2) {
 		$_SESSION['mess_type'] = 'warning';
 		$_SESSION['mess_title'] = 'Warning';
 		$_SESSION['message'] = "You are not Signed In.! <br> Please Sign in.";
@@ -60,17 +60,17 @@
 					<div class="nav-item">
 						<h3><?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></h3>
 						<p>
-							Admin
+							Employee
 						</p>
 					</div>
 					<li class="nav-item">
-						<a class="nav-link  active" href="admin_profile.php"><i class="ni ni-single-02 text-yellow"></i> Profile</a>
+						<a class="nav-link  active" href="employee_profile.php"><i class="ni ni-single-02 text-yellow"></i> Profile</a>
 					</li>
 					<li class="nav-item">
-						<a class=" nav-link  " href="admin_dashboard.php"><i class="ni ni-tv-2 text-primary"></i> Dashboard</a>
+						<a class=" nav-link  " href="employee_dashboard.php"><i class="ni ni-tv-2 text-primary"></i> Dashboard</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link " href="admin_project.php"><i class="ni ni-planet text-blue"></i> Projects</a>
+						<a class="nav-link " href="employee_project.php"><i class="ni ni-planet text-blue"></i> Projects</a>
 					</li>
 				</ul>
 				<!-- Divider -->
@@ -91,7 +91,7 @@
 				<hr>
 			</div>
 			<div class="col text-center">
-				<p class="display-4 m-3">Welcome <?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></p>
+				<p class="display-4 m-3">Welcome, <?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'].'.'; ?></p>
 			</div>
 				<?php
 					if (isset($_SESSION['message'])) {

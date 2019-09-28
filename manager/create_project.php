@@ -7,7 +7,7 @@ $user_id = $_SESSION['user_id'];
 
 $project_name = mysqli_real_escape_string($conn,$_POST['project_name']);
 $project_desc = mysqli_real_escape_string($conn,$_POST['project_description']);
-$deadline = date(Y-m-d,strtotime($_POST['deadline']));
+$deadline = $_POST['deadline'];
 $manager_id = mysqli_fetch_assoc(mysqli_query($conn, "SELECT manager_id FROM fl_manager WHERE user_id='$user_id'"));
 
 
@@ -20,7 +20,7 @@ if($slc_prj->num_rows > 0 ) {
 else
 {
 	$m_id = $manager_id['manager_id'];
-	$crt_prj = mysqli_query($conn, "INSERT INTO fl_project (manager_id, project_name, project_desc, deadline) VALUES ('$m_id', '$project_name', '$project_desc', $deadline)");
+	$crt_prj = mysqli_query($conn, "INSERT INTO fl_project (manager_id, project_name, project_desc, deadline) VALUES ('$m_id', '$project_name', '$project_desc', '$deadline')");
 
 	if(crt_prj)
 	{

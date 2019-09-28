@@ -1,18 +1,18 @@
 <?php
-    include '../assets/db/connect_db.php';
-    session_start();
-    if ($_SESSION['logged_in'] == false AND $_SESSION['user_type']==1) {
+	include '../assets/db/connect_db.php';
+	session_start();
+	if ($_SESSION['logged_in'] == false AND $_SESSION['user_type']==1) {
 		$_SESSION['mess_type'] = 'warning';
 		$_SESSION['mess_title'] = 'Warning';
-        $_SESSION['message'] = "You are not Signed In.! <br> Please Sign in.";
-        die(header('Location: ../index.php'));
+		$_SESSION['message'] = "You are not Signed In.! <br> Please Sign in.";
+		die(header('Location: ../index.php'));
 
-    }
-    $sql_project = "SELECT fl_project.project_id AS project_id, fl_manager.manager_id AS m_id, fl_project.project_name AS name, fl_project.project_desc AS p_desc,
-    fl_project.deadline AS deadline, fl_project.time_created AS created
-            FROM fl_project
-            INNER JOIN fl_manager ON fl_manager.manager_id = fl_project.manager_id";
-    $query_project = mysqli_query($conn,$sql_project);
+	}
+	$sql_project = "SELECT fl_project.project_id AS project_id, fl_manager.manager_id AS m_id, fl_project.project_name AS name, fl_project.project_desc AS p_desc,
+	fl_project.deadline AS deadline, fl_project.time_created AS created
+			FROM fl_project
+			INNER JOIN fl_manager ON fl_manager.manager_id = fl_project.manager_id";
+	$query_project = mysqli_query($conn,$sql_project);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,14 +86,15 @@
 		</div>
 	</nav>
 	<div class="main-content">
-	    <div class="header bg-gradient-primary pb-4 pt-3 pt-md-4">
-	      <div class="container-fluid">
-	        <div class="header-body">
+		<div class="header bg-gradient-primary pb-4 pt-3 pt-md-4">
+		  <div class="container-fluid">
+			<div class="header-body">
 				<?php
 					if (isset($_SESSION['message'])) {
 						?>
-						<div class="alert alert-<?php echo $_SESSION['mess_type']?>" role="alert">
+						<div class="alert alert-<?php echo $_SESSION['mess_type']?>" id="message" role="alert">
 							<strong><?php echo $_SESSION['mess_title']?>!</strong> <?php echo $_SESSION['message']?>
+							<button style="align: right;" onclick="document.getElementById('message').style.display='none'" ><i class="ni ni-fat-remove text-blue"></i></button>
 						</div>
 						<?php
 						unset($_SESSION['message']);
@@ -102,63 +103,88 @@
 					}
 				?>
 				<div class="jumbotron text-center">
-				    <p class="display-4">Welcome <?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></p>
-				    <hr class="my-4">
-				    <p>No Active project found, Create your first Project</p>
-				    <button class="btn btn-primary" data-toggle="modal" data-target="#modal-create-project">Create Project</button>
-			  	</div>
-	        </div>
-	      </div>
-	    </div>
-	    <div class="container">
+					<p class="display-4">Welcome <?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'].'.' ?></p>
+					<hr class="my-4">
+					<?php
+						if(mysqli_num_rows($query_project) < 1)
+						{
+					?>
+					<p>No Active Projects found, Create your first Project!</p>
+					<button class="btn btn-primary" data-toggle="modal" data-target="#modal-create-project">Create Project</button>
+				</div>
+			</div>
+		  </div>
+		</div>
+		<?php
+						}
+						else
+						{
+
+		?>
+		<div class="container">
 			<div class="row m-5">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="add-row" class="display table table-striped table-hover" >
-                                        <thead>
-                                            <tr>
-                                                <th>No.</th>
-                                                <th>Project Name</th>
-                                                <th>Decription</th>
-                                                <th>Deadline</th>
-                                                <th style="width: 10%">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                                $no = 1;
-                                                while ($row_project = mysqli_fetch_assoc($query_project)) {
-                                            ?>
-                                                <tr>
-                                                    <td><?= $no ?></td>
-                                                    <td><?= $row_project['name']?></td>
-                                                    <td><?= $row_project['p_desc']?></td>
-                                                    <td><?= $row_project['deadline']?>
-                                                    </td>
-                                                    <td>
-                                                        <form class="form-button-action" action="edit_manager.php" method="POST">
-                                                            <input type="hidden" name="user_id" value="<?=$row_project['user_id']?>">
-                                                            <input type="hidden" name="m_id" value="<?=$row_project['m_id']?>">
-                                                            <button type="submit" data-toggle="tooltip" name="remove" class="btn btn-link btn-danger p-2" data-original-title="Remove Projectq">
-                                                                <i class="fa fa-times"></i>
-                                                            </button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            <?php
-                                                $no++;
-                                                }
-                                            ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-			<?php include '../include/modal_project.php'; ?>
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="table-responsive">
+									<table id="add-row" class="display table table-striped table-hover" >
+										<thead>
+											<tr>
+												<th>No.</th>
+												<th>Project Name</th>
+												<th>Description</th>
+												<th>Deadline</th>
+												<th>View</th>
+												<th style="width: 10%">Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php
+												$no = 1;
+												while ($row_project = mysqli_fetch_assoc($query_project)) {
+											?>
+												<tr>
+													<td><?= $no ?></td>
+													<td><?= $row_project['name']?></td>
+													<td><?= $row_project['p_desc']?></td>
+													<td><?= $row_project['deadline']?>
+													</td>
+
+													<td>
+														<form class="form-button-action" action="view_project.php" method="POST">
+															<input type="hidden" name="user_id" value="<?=$row_project['user_id']?>">
+															<input type="hidden" name="m_id" value="<?=$row_project['m_id']?>">
+															<input type="hidden" name="project_id" value="<?=$row_project['project_id']?>">
+															<button type="submit" data-toggle="tooltip" name="view" class="btn btn-link btn-primary" data-original-title="View Project">
+																<i class="fa fa-eye"></i>
+															</button>
+														</form>
+													</td>
+													<td>
+														<form class="form-button-action" action="delete_project.php" method="POST">
+															<input type="hidden" name="user_id" value="<?=$row_project['user_id']?>">
+															<input type="hidden" name="m_id" value="<?=$row_project['m_id']?>">
+															<input type="hidden" name="project_id" value="<?=$row_project['project_id']?>">
+															<button type="submit" data-toggle="tooltip" name="remove" class="btn btn-link btn-danger" data-original-title="Remove Project">
+																<i class="fa fa-times"></i>
+															</button>
+														</form>
+													</td>
+												</tr>
+											<?php
+												$no++;
+												}
+											?>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			<?php
+		}
+		include '../include/modal_project.php'; ?>
 		</div>
 		<footer class="footer">
 			<div class="container-fluid">
@@ -188,9 +214,9 @@
 		</footer>
 	</div>
 	<script>
-        document.getElementById("logout").onclick = function () {
-            location.href = "../login-system/logout.php";
-        };
+		document.getElementById("logout").onclick = function () {
+			location.href = "../login-system/logout.php";
+		};
 	</script>
 	<?php
 		include '../include/js_include.php';

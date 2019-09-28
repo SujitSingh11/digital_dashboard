@@ -7,6 +7,11 @@
         $_SESSION['message'] = "You are not Signed In.! <br> Please Sign in.";
         die(header('Location: ../index.php'));
     }
+    $sql_project = "SELECT fl_project.project_id AS project_id, fl_employee.employee_id AS e_id, fl_project.project_name AS name, fl_project.project_desc AS p_desc,
+	fl_project.deadline AS deadline, fl_project.time_created AS created
+			FROM fl_project
+			INNER JOIN fl_employee ON fl_manager.manager_id = fl_project.manager_id";
+	$query_project = mysqli_query($conn,$sql_project);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,19 +59,9 @@
 				<!-- Navigation -->
 				<ul class="navbar-nav">
 					<div class="nav-item">
-						<h3><?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></h3>
+						<h3><?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'].'.' ?></h3>
 						<p>
-							<?php
-								if ($_SESSION['user_type']==0) {
-									echo 'Admin';
-								}
-								elseif ($_SESSION['user_type']==1) {
-									echo 'Manager';
-								}
-								elseif ($_SESSION['user_type']==2) {
-									echo 'Employee';
-								}
-						 	?>
+							Employee
 						</p>
 					</div>
 					<li class="nav-item">
@@ -97,8 +92,9 @@
 				<?php
 					if (isset($_SESSION['message'])) {
 						?>
-						<div class="alert alert-<?php echo $_SESSION['mess_type']?>" role="alert">
+						<div id="message" class="alert alert-<?php echo $_SESSION['mess_type']?>" role="alert">
 							<strong><?php echo $_SESSION['mess_title']?>!</strong> <?php echo $_SESSION['message']?>
+							<button style="align: right;" onclick="document.getElementById('message').style.display='none'" ><i class="ni ni-fat-remove text-blue"></i></button>
 						</div>
 						<?php
 						unset($_SESSION['message']);
@@ -107,16 +103,76 @@
 					}
 				?>
 				<div class="jumbotron text-center">
-				    <p class="display-4">Welcome <?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></p>
+				    <p class="display-4">Welcome <?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'].'.' ?></p>
 				    <hr class="my-4">
-				    <p>No Active Project Found</p>
+				    <?php
+						if(mysqli_num_rows($query_project) < 1)
+						{
+					?>
+					<p>No Active tasks found, choose your first task!</p>
+					<button class="btn btn-primary" data-toggle="modal" data-target="#modal-create-project">Create Project</button>
+				</div>
+			</div>
+		  </div>
+		</div>
+		<?php
+						}
+						else
+						{
 
-			  	</div>
-
-	        </div>
-	      </div>
-	    </div>
+		?>
 		<div class="container">
+			<div class="row m-5">
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="table-responsive">
+									<table id="add-row" class="display table table-striped table-hover" >
+										<thead>
+											<tr>
+												<th>No.</th>
+												<th>Project Name</th>
+												<th>Description</th>
+												<th>Deadline</th>
+												<th style="width: 10%">Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php
+												$no = 1;
+												while ($row_project = mysqli_fetch_assoc($query_project)) {
+											?>
+												<tr>
+													<td><?= $no ?></td>
+													<td><?= $row_project['name']?></td>
+													<td><?= $row_project['p_desc']?></td>
+													<td><?= $row_project['deadline']?>
+													</td>
+													<td>
+														<form class="form-button-action" action="delete_project.php" method="POST">
+															<input type="hidden" name="user_id" value="<?=$row_project['user_id']?>">
+															<input type="hidden" name="m_id" value="<?=$row_project['m_id']?>">
+															<input type="hidden" name="project_id" value="<?=$row_project['project_id']?>">
+															<button type="submit" data-toggle="tooltip" name="remove" class="btn btn-link btn-danger" data-original-title="Remove Projectq">
+																<i class="fa fa-times"></i>
+															</button>
+														</form>
+													</td>
+												</tr>
+											<?php
+												$no++;
+												}
+											?>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			<?php
+		}
+		?>
 
 		</div>
 		<footer class="footer">
