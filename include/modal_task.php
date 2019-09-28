@@ -7,7 +7,7 @@
 						<div class="text text-center my-3">Create a new task</div>
 					</div>
 					<div class="card-body px-lg-5 py-lg-3">
-						<form role="form" method="post" action="create_task.php">
+						<form role="form" method="post" action="../task-system/create_task.php">
 							<div class="form-group mb-3">
 								<div class="input-group input-group-alternative">
 									<div class="input-group-prepend">
@@ -21,7 +21,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text"><i class="ni ni-bullet-list-67"></i></span>
 									</div>
-									<textarea class="form-control" rows=5 placeholder="Task Description" name="task_name"></textarea>
+									<textarea class="form-control" rows=5 placeholder="Task Description" name="task_desc"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
