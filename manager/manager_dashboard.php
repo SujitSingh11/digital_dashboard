@@ -136,7 +136,8 @@
 												<th>Description</th>
 												<th>Deadline</th>
 												<th>View</th>
-												<th style="width: 10%">Action</th>
+												<th>Edit</th>
+												<th style="width: 10%">Remove</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -152,12 +153,23 @@
 													</td>
 
 													<td>
-														<form class="form-button-action" action="view_project.php" method="POST">
+														<form class="form-button-action p-1" action="view_project.php" method="POST">
 															<input type="hidden" name="user_id" value="<?=$row_project['user_id']?>">
 															<input type="hidden" name="m_id" value="<?=$row_project['m_id']?>">
 															<input type="hidden" name="project_id" value="<?=$row_project['project_id']?>">
-															<button type="submit" data-toggle="tooltip" name="view" class="btn btn-link btn-primary" data-original-title="View Project">
+															<button type="submit" data-toggle="tooltip" name="view" class="btn btn-link btn-primary p-1" data-original-title="View Project">
 																<i class="fa fa-eye"></i>
+															</button>
+														</form>
+													</td>
+
+													<td>
+														<form class="form-button-action" action="edit_project.php" method="POST">
+															<input type="hidden" name="user_id" value="<?=$row_project['user_id']?>">
+															<input type="hidden" name="m_id" value="<?=$row_project['m_id']?>">
+															<input type="hidden" name="project_id" value="<?=$row_project['project_id']?>">
+															<button type="submit" data-toggle="modal" data-target="#modal-create-project" name="view" class="btn btn-link btn-primary p-1" data-original-title="View Project">
+																<i class="fa fa-edit"></i>
 															</button>
 														</form>
 													</td>
@@ -166,7 +178,7 @@
 															<input type="hidden" name="user_id" value="<?=$row_project['user_id']?>">
 															<input type="hidden" name="m_id" value="<?=$row_project['m_id']?>">
 															<input type="hidden" name="project_id" value="<?=$row_project['project_id']?>">
-															<button type="submit" data-toggle="tooltip" name="remove" class="btn btn-link btn-danger" data-original-title="Remove Project">
+															<button type="submit" data-toggle="tooltip" name="remove" class="btn btn-link btn-danger p-1" data-original-title="Remove Project">
 																<i class="fa fa-times"></i>
 															</button>
 														</form>
@@ -185,8 +197,9 @@
 				</div>
 			<?php
 		}
-		include '../include/modal_project.php'; ?>
+		include '../include/modal_project.php';
 		include '../include/modal_task.php';
+		?>
 		</div>
 		<footer class="footer">
 			<div class="container-fluid">
