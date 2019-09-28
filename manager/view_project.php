@@ -6,16 +6,20 @@
 		$_SESSION['mess_title'] = 'Warning';
 		$_SESSION['message'] = "You are not Signed In.! <br> Please Sign in.";
 		die(header('Location: ../index.php'));
-
-		$project_id = $_POST['project_id'];
 	}
 	// $sql_project = "SELECT fl_project.project_id AS project_id, fl_project.manager_id AS m_id, fl_project.project_name AS name, fl_project.project_desc AS p_desc, fl_project.deadline AS deadline, fl_project.time_created AS created, fl_task.task_id AS t_id, fl_task.task_description AS t_desc,
 	// 		FROM fl_project
 	// 		INNER JOIN fl_task ON fl_project.project_id = fl_task.project_id";
-	$sql_project = "SELECT * FROM fl_project WHERE project_id = '$project_id";
+	
+	$project_id = $_POST['project_id'];
+	$sql_project = "SELECT * FROM fl_project WHERE project_id = '$project_id'";
 	$query_project = mysqli_query($conn,$sql_project);
 
-	$sql_task= "SELECT * FROM fl_task WHERE project_id = '$project_id";
+	$user_id = $_SESSION['user_id'];
+	$sql_manname = "SELECT first_name, last_name FROM fl_user WHERE user_id = '$user_id'";
+	$query_manname = mysqli_query($conn,$sql_manname);
+
+	$sql_task= "SELECT * FROM fl_task WHERE project_id = '$project_id'";
 	$query_task = mysqli_query($conn,$sql_task);
 ?>
 <!DOCTYPE html>
@@ -64,7 +68,7 @@
 				<!-- Navigation -->
 				<ul class="navbar-nav">
 					<div class="nav-item">
-						<h3><?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></h3>
+						<h3><?php echo $_SESSION['first_name'].' '.$_SESSION['last_name']?></h3>
 						<p>
 							Manager
 						</p>
@@ -73,7 +77,7 @@
 						<a class="nav-link  active " href="profile.php"><i class="ni ni-single-02 text-yellow"></i> Profile</a>
 					</li>
 					<li class="nav-item ">
-						<a class=" nav-link " href="dashboard.php"><i class="ni ni-tv-2 text-primary"></i> Dashboard</a>
+						<a class="nav-link " href="dashboard.php"><i class="ni ni-tv-2 text-primary"></i> Dashboard</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link " href="projects.php"><i class="ni ni-planet text-blue"></i> Projects</a>
@@ -107,17 +111,23 @@
 					}
 				?>
 				<div class="jumbotron text-center">
-					<p class="display-4"><?php while($row_project = mysqli_fetch_assoc($query_project)) {
+					<p class="display-3"><?php while($row_project = mysqli_fetch_assoc($query_project)) {
 
 						echo $row_project['project_name'];
-
-					?></p>
+						while($row_manname= mysqli_fetch_assoc($query_manname)){
+						?>
+						<br>
+						<h4 class="text-muted">
+						<?php
+							echo "Managed by ".$row_manname['first_name'].' '.$row_manname['last_name'];	
+					}
+					?></h4></p>
 					<hr class="my-4">
-					<p class="display-2">
-						<?php	echo $row_project['project_desc'];
+					<p class="display-4">
+						<?php echo $row_project['project_desc'];
 
 					}
-						?>
+					?>
 					</p>
 					<?php
 						if(mysqli_num_rows($query_task) < 1)
@@ -125,7 +135,7 @@
 
 					?>
 					<p>No Active tasks found, Create the first task</p>
-					<button class="btn btn-primary" data-toggle="modal" data-target="#modal-create-task">Create Project</button>
+					<button class="btn btn-primary" data-toggle="modal" data-target="#modal-create-task">Create Task</button>
 				</div>
 			</div>
 		  </div>
