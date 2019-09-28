@@ -141,7 +141,7 @@
                                                         <form class="form-button-action" action="edit_manager.php" method="POST">
                                                             <input type="hidden" name="user_id" value="<?=$row_project['user_id']?>">
                                                             <input type="hidden" name="m_id" value="<?=$row_project['m_id']?>">
-                                                            <button type="submit" data-toggle="tooltip" name="remove" class="btn btn-link btn-danger" data-original-title="Remove Projectq">
+                                                            <button type="submit" data-toggle="tooltip" name="remove" class="btn btn-link btn-danger p-2" data-original-title="Remove Projectq">
                                                                 <i class="fa fa-times"></i>
                                                             </button>
                                                         </form>
