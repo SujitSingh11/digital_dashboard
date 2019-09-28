@@ -1,17 +1,22 @@
 <?php
-    include '../assets/db/connect_db.php';
-    session_start();
-    if ($_SESSION['logged_in'] == false AND $_SESSION['user_type']==2) {
+	include '../assets/db/connect_db.php';
+	session_start();
+	if ($_SESSION['logged_in'] == false AND $_SESSION['user_type']==1) {
 		$_SESSION['mess_type'] = 'warning';
 		$_SESSION['mess_title'] = 'Warning';
-        $_SESSION['message'] = "You are not Signed In.! <br> Please Sign in.";
-        die(header('Location: ../index.php'));
-    }
-    $sql_project = "SELECT fl_project.project_id AS project_id, fl_employee.employee_id AS e_id, fl_project.project_name AS name, fl_project.project_desc AS p_desc,
-	fl_project.deadline AS deadline, fl_project.time_created AS created
-			FROM fl_project
-			INNER JOIN fl_employee ON fl_manager.manager_id = fl_project.manager_id";
+		$_SESSION['message'] = "You are not Signed In.! <br> Please Sign in.";
+		die(header('Location: ../index.php'));
+
+		$project_id = $_POST['project_id'];
+	}
+	// $sql_project = "SELECT fl_project.project_id AS project_id, fl_project.manager_id AS m_id, fl_project.project_name AS name, fl_project.project_desc AS p_desc, fl_project.deadline AS deadline, fl_project.time_created AS created, fl_task.task_id AS t_id, fl_task.task_description AS t_desc,
+	// 		FROM fl_project
+	// 		INNER JOIN fl_task ON fl_project.project_id = fl_task.project_id";
+	$sql_project = "SELECT * FROM fl_project WHERE project_id = '$project_id";
 	$query_project = mysqli_query($conn,$sql_project);
+
+	$sql_task= "SELECT * FROM fl_task WHERE project_id = '$project_id";
+	$query_task = mysqli_query($conn,$sql_task);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +36,7 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<a class="navbar-brand pt-0" href="index.html">
-				<img src="assets/img/logo_black.png" class="navbar-brand-img" alt="...">
+				<img src="../assets/img/logo_black.png" class="navbar-brand-img" alt="...">
 			</a>
 			<ul class="nav align-items-center d-md-none">
 				<li class="nav-item dropdown">
@@ -45,7 +50,7 @@
 					<div class="row">
 						<div class="col-6 collapse-brand">
 							<a href="index.html">
-								<img src="assets/img/logo_black.png" class="navbar-brand-img" alt="...">
+								<img src="../assets/img/logo_black.png" class="navbar-brand-img" alt="...">
 							</a>
 						</div>
 						<div class="col-6 collapse-close">
@@ -59,15 +64,15 @@
 				<!-- Navigation -->
 				<ul class="navbar-nav">
 					<div class="nav-item">
-						<h3><?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'].'.' ?></h3>
+						<h3><?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></h3>
 						<p>
-							Employee
+							Manager
 						</p>
 					</div>
 					<li class="nav-item">
 						<a class="nav-link  active " href="profile.php"><i class="ni ni-single-02 text-yellow"></i> Profile</a>
 					</li>
-					<li class="nav-item  class=" active>
+					<li class="nav-item ">
 						<a class=" nav-link " href="dashboard.php"><i class="ni ni-tv-2 text-primary"></i> Dashboard</a>
 					</li>
 					<li class="nav-item">
@@ -78,21 +83,20 @@
 				<hr class="my-3">
 				<ul class="navbar-nav mb-md-3">
 					<li class="nav-item">
-						<button type="submit" class="btn btn-icon btn-3 btn-danger" id="logout"><i class="ni ni-button-power"></i>  Signout</button>
+						<button type="submit" class="btn btn-icon btn-3 btn-danger" id="logout"><i class="ni ni-button-power"></i> Signout</button>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<div class="main-content">
-
-	    <div class="header bg-gradient-primary pb-4 pt-3 pt-md-4">
-	      <div class="container-fluid">
-	        <div class="header-body">
+		<div class="header bg-gradient-primary pb-4 pt-3 pt-md-4">
+		  <div class="container-fluid">
+			<div class="header-body">
 				<?php
 					if (isset($_SESSION['message'])) {
 						?>
-						<div id="message" class="alert alert-<?php echo $_SESSION['mess_type']?>" role="alert">
+						<div class="alert alert-<?php echo $_SESSION['mess_type']?>" id="message" role="alert">
 							<strong><?php echo $_SESSION['mess_title']?>!</strong> <?php echo $_SESSION['message']?>
 							<button style="align: right;" onclick="document.getElementById('message').style.display='none'" ><i class="ni ni-fat-remove text-blue"></i></button>
 						</div>
@@ -103,14 +107,25 @@
 					}
 				?>
 				<div class="jumbotron text-center">
-				    <p class="display-4">Welcome <?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'].'.' ?></p>
-				    <hr class="my-4">
-				    <?php
-						if(mysqli_num_rows($query_project) < 1)
+					<p class="display-4"><?php while($row_project = mysqli_fetch_assoc($query_project)) {
+
+						echo $row_project['project_name'];
+
+					?></p>
+					<hr class="my-4">
+					<p class="display-2">
+						<?php	echo $row_project['project_desc'];
+
+					}
+						?>
+					</p>
+					<?php
+						if(mysqli_num_rows($query_task) < 1)
 						{
+
 					?>
-					<p>No Active tasks found, choose your first task!</p>
-					<button class="btn btn-primary" data-toggle="modal" data-target="#modal-create-project">Create Project</button>
+					<p>No Active tasks found, Create the first task</p>
+					<button class="btn btn-primary" data-toggle="modal" data-target="#modal-create-task">Create Project</button>
 				</div>
 			</div>
 		  </div>
@@ -131,29 +146,27 @@
 										<thead>
 											<tr>
 												<th>No.</th>
-												<th>Project Name</th>
-												<th>Description</th>
+												<th>Task Description</th>
 												<th>Deadline</th>
-												<th style="width: 10%">Action</th>
+												<th style="width: 10%">Assigned to</th>
+												<th>Remove</th>
 											</tr>
 										</thead>
 										<tbody>
 											<?php
 												$no = 1;
-												while ($row_project = mysqli_fetch_assoc($query_project)) {
+												while ($row_task = mysqli_fetch_assoc($query_task)) {
 											?>
 												<tr>
 													<td><?= $no ?></td>
-													<td><?= $row_project['name']?></td>
-													<td><?= $row_project['p_desc']?></td>
-													<td><?= $row_project['deadline']?>
+													<td><?= $row_task['task_description']?></td>
+													<td><?= $row_task['deadline']?>
 													</td>
 													<td>
-														<form class="form-button-action" action="delete_project.php" method="POST">
-															<input type="hidden" name="user_id" value="<?=$row_project['user_id']?>">
-															<input type="hidden" name="m_id" value="<?=$row_project['m_id']?>">
-															<input type="hidden" name="project_id" value="<?=$row_project['project_id']?>">
-															<button type="submit" data-toggle="tooltip" name="remove" class="btn btn-link btn-danger" data-original-title="Remove Projectq">
+														<form class="form-button-action" action="delete_task.php" method="POST">
+															<input type="hidden" name="employee_id" value="<?=$row_task['employee_id']?>">
+															<input type="hidden" name="project_id" value="<?=$row_task['project_id']?>">
+															<button type="submit" data-toggle="tooltip" name="remove" class="btn btn-link btn-danger" data-original-title="Remove Project">
 																<i class="fa fa-times"></i>
 															</button>
 														</form>
@@ -172,8 +185,7 @@
 				</div>
 			<?php
 		}
-		?>
-
+		include '../include/modal_task.php'; ?>
 		</div>
 		<footer class="footer">
 			<div class="container-fluid">
@@ -203,9 +215,9 @@
 		</footer>
 	</div>
 	<script>
-        document.getElementById("logout").onclick = function () {
-            location.href = "../login-system/logout.php";
-        };
+		document.getElementById("logout").onclick = function () {
+			location.href = "../login-system/logout.php";
+		};
 	</script>
 	<?php
 		include '../include/js_include.php';
