@@ -121,6 +121,7 @@
 						{
 
 		?>
+		<button class="btn btn-success" data-toggle="modal" data-target="#modal-create-project">Create Project</button>
 		<div class="container">
 			<div class="row m-5">
 					<div class="col-md-12">
