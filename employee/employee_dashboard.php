@@ -7,11 +7,9 @@
         $_SESSION['message'] = "You are not Signed In.! <br> Please Sign in.";
         die(header('Location: ../index.php'));
     }
-    $sql_project = "SELECT fl_project.project_id AS project_id, fl_employee.employee_id AS e_id, fl_project.project_name AS name, fl_project.project_desc AS p_desc,
-	fl_project.deadline AS deadline, fl_project.time_created AS created
-			FROM fl_project
-			INNER JOIN fl_employee ON fl_manager.manager_id = fl_project.manager_id";
-	$query_project = mysqli_query($conn,$sql_project);
+    $user_id = $_SESSION['user_id'];
+    $employee_id = mysqli_fetch_assoc(mysqli_query($conn,"SELECT * FROM fl_employee WHERE user_id = $user_id"));
+    $_SESSION['employee_id'] = $employee_id['employee_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +29,7 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<a class="navbar-brand pt-0" href="index.html">
-				<img src="assets/img/logo_black.png" class="navbar-brand-img" alt="...">
+				<img src="../assets/img/logo_black.png" class="navbar-brand-img" alt="...">
 			</a>
 			<ul class="nav align-items-center d-md-none">
 				<li class="nav-item dropdown">
@@ -45,7 +43,7 @@
 					<div class="row">
 						<div class="col-6 collapse-brand">
 							<a href="index.html">
-								<img src="assets/img/logo_black.png" class="navbar-brand-img" alt="...">
+								<img src="../assets/img/logo_black.png" class="navbar-brand-img" alt="...">
 							</a>
 						</div>
 						<div class="col-6 collapse-close">
@@ -65,13 +63,13 @@
 						</p>
 					</div>
 					<li class="nav-item">
-						<a class="nav-link  active " href="profile.php"><i class="ni ni-single-02 text-yellow"></i> Profile</a>
-					</li>
-					<li class="nav-item  class=" active>
-						<a class=" nav-link " href="dashboard.php"><i class="ni ni-tv-2 text-primary"></i> Dashboard</a>
+						<a class="nav-link   " href="employee_profile.php"><i class="ni ni-single-02 text-yellow"></i> Profile</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link " href="projects.php"><i class="ni ni-planet text-blue"></i> Projects</a>
+						<a class=" nav-link active" href="employee_dashboard.php"><i class="ni ni-tv-2 text-primary"></i> Dashboard</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " href="employee_project.php"><i class="ni ni-planet text-blue"></i> Projects</a>
 					</li>
 				</ul>
 				<!-- Divider -->
@@ -85,7 +83,6 @@
 		</div>
 	</nav>
 	<div class="main-content">
-
 	    <div class="header bg-gradient-primary pb-4 pt-3 pt-md-4">
 	      <div class="container-fluid">
 	        <div class="header-body">
@@ -105,76 +102,13 @@
 				<div class="jumbotron text-center">
 				    <p class="display-4">Welcome <?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'].'.' ?></p>
 				    <hr class="my-4">
-				    <?php
-						if(mysqli_num_rows($query_project) < 1)
-						{
-					?>
-					<p>No Active tasks found, choose your first task!</p>
-					<button class="btn btn-primary" data-toggle="modal" data-target="#modal-create-project">Create Project</button>
+					<p>View your Projects</p>
+					<button class="btn btn-primary" href="employee_project.php" type="button">View Projects</button>
 				</div>
 			</div>
 		  </div>
 		</div>
-		<?php
-						}
-						else
-						{
 
-		?>
-		<div class="container">
-			<div class="row m-5">
-					<div class="col-md-12">
-						<div class="card">
-							<div class="card-body">
-								<div class="table-responsive">
-									<table id="add-row" class="display table table-striped table-hover" >
-										<thead>
-											<tr>
-												<th>No.</th>
-												<th>Project Name</th>
-												<th>Description</th>
-												<th>Deadline</th>
-												<th style="width: 10%">Action</th>
-											</tr>
-										</thead>
-										<tbody>
-											<?php
-												$no = 1;
-												while ($row_project = mysqli_fetch_assoc($query_project)) {
-											?>
-												<tr>
-													<td><?= $no ?></td>
-													<td><?= $row_project['name']?></td>
-													<td><?= $row_project['p_desc']?></td>
-													<td><?= $row_project['deadline']?>
-													</td>
-													<td>
-														<form class="form-button-action" action="delete_project.php" method="POST">
-															<input type="hidden" name="user_id" value="<?=$row_project['user_id']?>">
-															<input type="hidden" name="m_id" value="<?=$row_project['m_id']?>">
-															<input type="hidden" name="project_id" value="<?=$row_project['project_id']?>">
-															<button type="submit" data-toggle="tooltip" name="remove" class="btn btn-link btn-danger" data-original-title="Remove Projectq">
-																<i class="fa fa-times"></i>
-															</button>
-														</form>
-													</td>
-												</tr>
-											<?php
-												$no++;
-												}
-											?>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			<?php
-		}
-		?>
-
-		</div>
 		<footer class="footer">
 			<div class="container-fluid">
 				<nav class="pull-left" style="float:left;">

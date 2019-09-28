@@ -92,9 +92,8 @@
 				<?php
 					if (isset($_SESSION['message'])) {
 						?>
-						<div class="alert alert-<?php echo $_SESSION['mess_type']?>" id="message" role="alert">
+						<div class="alert alert-<?php echo $_SESSION['mess_type'] ?> alert-dismissible fade show" id="message" role="alert">
 							<strong><?php echo $_SESSION['mess_title']?>!</strong> <?php echo $_SESSION['message']?>
-							<button style="align: right;" onclick="document.getElementById('message').style.display='none'" ><i class="ni ni-fat-remove text-blue"></i></button>
 						</div>
 						<?php
 						unset($_SESSION['message']);
